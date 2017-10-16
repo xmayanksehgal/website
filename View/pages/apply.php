@@ -2,7 +2,7 @@
     <div class="container">
         <img src="img/SKP-page-apply-illus.png" id="apply-illus" class="illus" />
         <h2><?= _("JOIN SKILL PROJECT"); ?></h2>
-        <p>Skill Project Editors can access restricted features. You can amend skills, not just those you created in the last hour. You can:</p>
+        <p>SpringRole Skill Project Editors can access restricted features. You can amend skills, not just those you created in the last hour. You can:</p>
         <ul>
             <li>Add a skill as a parent of an existing skill</li>
             <li>Rename an existing skill</li>

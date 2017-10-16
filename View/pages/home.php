@@ -19,8 +19,8 @@
 <section id="home-main-panel">
 	<div class="container">
 		<img class="home-illus brain-illus" alt="" src="img/SKP-page-home-brain.png" />
-		<h2>Welcome to Skill Project! What can you do?</h2>
-		<p>At Skill Project, we believe everyone has a unique share of humanity's skills.<br />Become part of our skill-loving community and share what you can do!</p>
+		<h2>Welcome to SpringRole Skill Project! What can you do?</h2>
+		<p>At SpringRole Skill Project, we believe everyone has a unique share of humanity's skills.<br />Become part of our skill-loving community and share what you can do!</p>
 
 		<img class="home-illus network-illus" alt="" src="img/SKP-page-home-network.png" />
 		<h2>Every skill is connected to another one</h2>
@@ -29,13 +29,13 @@
 
 		<img class="home-illus circle-illus" alt="" src="img/SKP-page-home-circle.png" />
 		<h2>Spread the word</h2>
-		<p>By joining Skill Project you are contributing your unique understanding of your skills. The only way we can meet our goal is to create a large and diverse community of people who are willing to do the same.<br />Go tell your friends!</p>
+		<p>By joining SpringRole Skill Project you are contributing your unique understanding of your skills. The only way we can meet our goal is to create a large and diverse community of people who are willing to do the same.<br />Go tell your friends!</p>
 	</div> 
 </section>
 <section id="home-bottom-panel" class="green">
 	<div class="container">
 		<h2>Ready to go?</h2>
 		<p>Start exploring skills and add your own!</p>
-		<div id="home-btn-go-bottom" class="home-btn"><a href="<?= \Controller\Router::url("graph"); ?>">Enter Skill Project</a></div>
+		<div id="home-btn-go-bottom" class="home-btn"><a href="<?= \Controller\Router::url("graph"); ?>">Enter SpringRole Skill Project</a></div>
 	</div> 
 </section>

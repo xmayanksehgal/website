@@ -7,13 +7,13 @@
         <p>In this age of ambitious big data endeavours and advanced social tools, we firmly believe that it’s possible to map out all human skills. But the only smart way of doing so, is by leveraging collective knowledge and making as many people a part of the project as possible.</p>
         <h4>Our Mission</h4>
         <p>We aim to build the largest, most multilingual, most accurate skills database ever made by allowing <b>a diverse and skillful community</b> to contribute their individual skills to the global map.</p>
-        <p>The crowdsourced data is free for non-commercial use. Because the database is the result of many people's voluntary effort, we do not allow the data to be used commercially. However, we may consider licensing it for free to people or organizations who need it for socially valuable projects.</p>
+        <p>The crowdsourced data is free. Because the database is the result of many people's voluntary effort along with ours, we are finding ways to export the data and make an API through which users can get access to it. </p>
         <h4>How Can You Help?</h4>
-        <p>In our simple structure, <b>each skill can be split into more specific sub-skills</b>. All you have to do is add your own skills in the most appropriate section.</p>
+        <p>In our simple structure, <b>each skill can be split into more specific sub-skills</b>. All you have to do is add your own skills in the most appropriate section. Your contribution will be reviewed and added to the database.</p>
         <p><a href="<?= \Controller\Router::url("graph"); ?>" alt="<?= _("The skills"); ?>">You can browse the skill database</a> right now. You don't need an account to do it.</p>
         <p>If you want to add your skills, you can <a class="register-link" href="<?= \Controller\Router::url("register"); ?>" title="<?= _("Register!"); ?>">sign up</a> in a matter of seconds. Add new skills and share your thoughts about existing ones.</p>
-        <p>If you want to edit skills added by other users, you need to <a href="<?= \Controller\Router::url("apply"); ?>" title="<?= _("Become an Editor!"); ?>">apply to become an Editor</a>. Editor applications are reviewed daily so you can quickly become a full-fledged member of our growing community.</p>
-        <p>If you want to meet the team and the first members of Skill Project, head straight for our <a href="<?= \Config\Config::VANILLA_URL?>" title="<?= _("Skill Project's Community"); ?>">community forum</a> and introduce yourself!</p>    
+        <p>If you want to edit skills added by other users, you need to <a href="<?= \Controller\Router::url("apply"); ?>" title="<?= _("Become an Editor!"); ?>">apply to become an Editor</a>. Editor applications are reviewed so you can quickly become a full-fledged member of our growing community.</p>
+        <p>If you want to meet the team or know how the Skill Project started, head straight for our <a href="<?= \Config\Config::VANILLA_URL?>" title="<?= _("Skill Project's Community"); ?>">community forum</a> and introduce yourself!</p>
     </div>
 </section>
 <hr />
@@ -31,7 +31,7 @@
         <div class="faq-q">
             <h4>Are there illegal skills?</h4>
             <div class="faq-a">
-                <p>Every country has laws about what people can and cannot do. We do not consider that listing a skill which is illegal to perform in some countries should be illegal itself. However, Skill Project is not a place to promote openly illegal and/or immoral activities so expect the Editors to delete or flag inappropriate skills.</p>
+                <p>Every country has laws about what people can and cannot do. We do not consider that listing a skill which is illegal to perform in some countries should be illegal itself. However, Skill Project is not a place to promote openly illegal and/or immoral activities so expect the Editors to reject or flag inappropriate skills.</p>
             </div>
         </div>
         <div class="faq-q">
@@ -115,18 +115,12 @@
                 <p>It’s not “pink”, it’s “orchid”, you insensitive clod.</p>
             </div>
         </div>
-        <div class="faq-q">
-            <h4>Is this shit made in Flash or what?</h4>
-            <div class="faq-a">
-                <p>No sir. It’s genuine HTML 5 with a Canvas flavour and some <a href="http://kineticjs.com/">KineticJS</a> magic on top! And let’s not forget the hidden part of the iceberg: the database is powered by the fantastic graph-based database <a href="http://www.neo4j.org/">Neo4J</a>.</p>
-            </div>
-        </div>
 
         <h3><?=_("The Database")?></h3>
         <div class="faq-q">
             <h4>How many skills are there in the database?</h4>
             <div class="faq-a">
-                <p>Skill Project started a few days ago with a little over 300 skills. We expect the database to grow quickly into thousands of skills.</p>
+                <p>Skill Project started a few hundered skills. We expect the database to grow quickly into thousands of skills.</p>
             </div>
         </div>
         <div class="faq-q">
@@ -138,7 +132,7 @@
         <div class="faq-q">
             <h4>Do you have a REST API?</h4>
             <div class="faq-a">
-                <p>It's on our roadmap but we don’t consider it a priority. If it’s important to you, raise the issue on the <a href="<?= \Config\Config::VANILLA_URL?>" title="<?= _("Skill Project's Community"); ?>">community forum</a> so we can discuss it together and see if it would come handy to more people. We will then reconsider our priorities.</p>
+                <p>We are working on it! It might be comming soon. If you have any suggestions you can write that on the <a href="<?= \Config\Config::VANILLA_URL?>" title="<?= _("Skill Project's Community"); ?>">community forum</a> so we can discuss it together and see if it would come handy to more people. We will then reconsider our priorities.</p>
             </div>
         </div>
 
@@ -167,14 +161,7 @@
         <div class="faq-q">
             <h4>What's next for Skill Project?</h4>
             <div class="faq-a">
-                <p>We believe our 21st century society is becoming more and more skill-centered, which is why we created Skill Project. We believe there will be many ways to leverage the power of a community-curated comprehensive skills database, but we have no definite plans for it yet. We are eager to read what <em>you</em> think about it! Let’s talk about it in the <a href="<?= \Config\Config::VANILLA_URL?>" title="<?= _("Skill Project's Community"); ?>">community forum</a>.</p>
-            </div>
-        </div>
-        <div class="faq-q">
-            <h4>How do you make money out of this?</h4>
-            <div class="faq-a">
-                <p>At the moment, we don’t, but the satisfaction we get by working on a global scale project for humanity is more than enough to keep us focused!<br />
-                However, we do hope that a business plan will come out of it one day. We are never going to turn Skill Project into a for-profit website. It just wouldn’t make any sense. But we may consider developing some side projects linked with Skill Project in one way or another. Not our priority right now, though.</p>
+                <p>We believe our 21st century society is becoming more and more skill-centered, which is why we created Skill Project. We believe there will be many ways to leverage the power of a community-curated comprehensive skills database. We are eager to read what <em>you</em> think about it! Let’s talk about it in the <a href="<?= \Config\Config::VANILLA_URL?>" title="<?= _("Skill Project's Community"); ?>">community forum</a>.</p>
             </div>
         </div>
         <div class="faq-q">
@@ -184,12 +171,6 @@
             </div>
         </div>
 
-        <div class="faq-q">
-            <h4>Is there a mobile Skill Project app available?</h4>
-            <div class="faq-a">
-                <p>Not yet!</p>
-            </div>
-        </div>
 
         <h3><?=_("Becoming an Editor")?></h3>
         <div class="faq-q">
@@ -201,7 +182,7 @@
         <div class="faq-q">
             <h4>How many Editors are there?</h4>
             <div class="faq-a">
-                <p>We started Skill Project a few days ago, when the only Editors were the 3 core team members.</p>
+                <p>We started Skill Project a few Editors that were in the core team, but we expect more people to volunteer for this.</p>
             </div>
         </div>
 
@@ -218,8 +199,8 @@
 <hr />
 <section>
     <div class="container">
-        <h2><?= _("MEET THE TEAM"); ?></h2>
-        <p>Skill Project is brought to you by 3 friends living in Paris, France. We share a passion for learning, teaching and experimenting which has naturally led us to come up with Skill Project. Apart from that, we come from very different cultural and gastronomical backgrounds! Come and chat with us in the <a href="<?= \Config\Config::VANILLA_URL?>" title="<?= _("Skill Project's Community"); ?>">community section</a>.
+        <h2><?= _("MEET THE FOUNDERS"); ?></h2>
+        <p>Skill Project was brought to you by 3 friends living in Paris, France. Who passion for learning, teaching and experimenting which has naturally led us to come up with Skill Project. Come and chat with us in the <a href="<?= \Config\Config::VANILLA_URL?>" title="<?= _("Skill Project's Community"); ?>">community section</a>.
         </p>
         <div class="project-col">
             <div id="dario-pic" class="team-pic"></div>

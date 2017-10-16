@@ -4,10 +4,10 @@
     <div class="container">
         <h2><?= _("Terms of Use"); ?></h2>
         <h3><?= _("Our Services"); ?></h3>
-        <p>Skill Project is dedicated to building a comprehensive human skills multilingual database. Our role is to host the database and the tools to edit it, which can be found <a href="http://www.skill-project.org" alt="Skill Project">here</a>. However, we act only as a hosting service, maintaining the infrastructure and organizational framework that allows our users to build the skills database by contributing and editing skills themselves. Because of our unique role, there are a couple of things you should be aware of when considering our relationship to you and the other users:</p>
+        <p>Skill Project is dedicated to building a comprehensive human skills taxonomy. Our role is to host the database and the tools to edit it, which can be found <a href="http://www.skill-project.org" alt="SpringRole Skill Project">here</a>. However, we act only as a hosting service, maintaining the infrastructure and organizational framework that allows our users to build the skills database by contributing and editing skills themselves. Because of our unique role, there are a couple of things you should be aware of when considering our relationship to you and the other users:</p>
         <ol >
-            <li><b>We do not take an editorial role:</b> Because the skills database is collaboratively edited, all of the content that we host is provided by users like yourself, and we do not take an editorial role. This means that we generally do not monitor or edit the content of the Skill Project website, and we do not take any responsibility for this content. Similarly, we do not endorse any opinions expressed via our services, and we do not represent or guarantee the truthfulness, accuracy, or reliability of any submitted community content. Instead, we simply provide access to the content that your fellow users have contributed and edited. </li>
-            <li><b>You are responsible for your own actions:</b> You are legally responsible for your edits and contributions on Skill Project, so for your own protection you should exercise caution and avoid contributing any content that may result in criminal or civil liability under any applicable laws. For clarity, applicable law includes at least the laws of France where Skill Project is currently hosted. Although we may not agree with such actions, we warn Editors and contributors that authorities may seek to apply other country laws to you, including local laws where you live or where you view or edit content. Skill Project generally cannot offer any protection, guarantee, immunity or indemnification. </li>
+            <li><b>We take an editorial role:</b> As the skills database is collaboratively edited, almost of the content that we host is provided by users like yourself, and we take an editorial role. This means that we monitor or edit the content of the SpringRole Skill Project website, and we take responsibility for this content because we want to keep the truthfulness, accuracy, or reliability of it's content. However suggestions are more than welcome. </li>
+            <li><b>You are responsible for your own actions:</b> You are legally responsible for your edits and contributions on SpringRole Skill Project, so for your own protection you should exercise caution and avoid contributing any content that may result in criminal or civil liability under any applicable laws.</li>
         </ol>
     </div>
 </section>
@@ -48,7 +48,7 @@
         </ul>
         <h4>Violating the Privacy of Others</h4>
         <ul>
-            <li>Infringing the privacy rights of others under the laws of France or other applicable laws (which may include the laws where you live or where you view or edit content); </li>
+            <li>Infringing the privacy rights of others under any applicable governing body (which may include the laws where you live or where you view or edit content); </li>
             <li>Soliciting personally identifiable information for purposes of harassment, exploitation, violation of privacy, or any promotional or commercial purpose not explicitly approved by Skill Project; and </li>
             <li>Soliciting personally identifiable information from anyone under the age of 18 for an illegal purpose or violating any applicable law regarding the health or well-being of minors. </li>
         </ul>
@@ -74,7 +74,7 @@
             <li>Posting or distributing content that contains any viruses, malware, worms, Trojan horses, malicious code, or other device that could harm our technical infrastructure or system or that of our users; </li>
             <li>Engaging in automated uses of the site that are abusive or disruptive of the services and have not been approved by Skill Project; </li>
             <li>Disrupting the services by placing an undue burden on our website, network or servers; </li>
-            <li>Disrupting the services by inundating the Skill Project website with communications or other traffic that suggests no serious intent to use the Skill Project website for its stated purpose; </li>
+            <li>Disrupting the services by inundating the Skill Project website with communications or other traffic that suggests no serious intent to use the SpringRole Skill Project website for its stated purpose; </li>
             <li>Knowingly accessing, tampering with, or using any of our non-public areas in our computer systems without authorization; and </li>
             <li>Probing, scanning, or testing the vulnerability of any of our technical systems or networks unless all the following conditions are met: </li>
         </ul>
@@ -98,14 +98,14 @@
 <section>
     <div class="container">
         <h3><?=_("Trademarks");?></h3>
-        <p>The trademarks, service marks and logos ("Marks") on the Skill Project website are owned by Skill Project, subject to copyright and other intellectual property rights under the law.</p>
+        <p>The trademarks, service marks and logos ("Marks") on the SpringRole Skill Project website are owned by SpringRole Skill Project, subject to copyright and other intellectual property rights under the law.</p>
     </div>
 </section>
 <hr />
 <section>
     <div class="container">
         <h3><?= _("Modifications of These Terms of Use"); ?></h3>
-        <p>Because it may be necessary to modify these Terms of Use from time to time, we will provide notice of such modifications. However, we ask that you please periodically review the most up-to-date version of these Terms of Use. Your continued use of our services after the new Terms of Use become official following the notice constitutes an acceptance of these Terms of Use on your part. For the protection of Skill Project and other users like yourself, if you do not agree with our Terms of Use, you cannot use our services.</p>
+        <p>Because it may be necessary to modify these Terms of Use from time to time, we will provide notice of such modifications. However, we ask that you please periodically review the most up-to-date version of these Terms of Use. Your continued use of our services after the new Terms of Use become official following the notice constitutes an acceptance of these Terms of Use on your part. For the protection of SpringRole Skill Project and other users like yourself, if you do not agree with our Terms of Use, you cannot use our services.</p>
     </div>
 </section>
 
