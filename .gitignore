@@ -2,3 +2,4 @@
 *.idea/
 web/img/._*
 vendor/
+node_modules/

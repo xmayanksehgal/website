@@ -33,9 +33,9 @@
                     echo "var doTour = false;\n";
                 }
             }
-
-            echo "var skillCount = " . $skillCount . ";\n";
-            echo "var wsUrl = '" . $wsUrl . "';\n";
+            // Has to be made dynamic
+            echo "var skillCount = " . 2185 . ";\n";
+            echo "var wsUrl = '" . 2185 . "';\n";
         ?>
 
         //Do dinosaurs still exist ?

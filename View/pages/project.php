@@ -186,6 +186,13 @@
             </div>
         </div>
 
+        <div class="faq-q">
+            <h4>What is SpringRole's story with the Skill-Project?</h4>
+            <div class="faq-a">
+                <p>SpringRole wanted to build a Taxonomy of Skills and came across The Skills Project. We contacted the founders and decided that SpringRole can extend the current peice of work for the greater good.</p>
+            </div>
+        </div>
+
         <script>
             $(".faq-q h4").on("click", function(){
                 $(".faq-q h4.selected").not($(this)).removeClass("selected").next(".faq-a").slideToggle(300);

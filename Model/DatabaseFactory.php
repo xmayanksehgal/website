@@ -30,7 +30,8 @@
             }
 
             try{
-                self::$client = new \Everyman\Neo4j\Client(Config::NEO_HOST, Config::NEO_PORT);
+                self::$client = new \Everyman\Neo4j\Client((new \Everyman\Neo4j\Transport\Curl(Config::NEO_HOST,Config::NEO_PORT))
+                ->setAuth(Config::NEO_USERNAME,Config::NEO_PASSWORD));
             }
             catch(\Everyman\Neo4j\Exception $e){
                 if (Config::debug){
@@ -79,4 +80,4 @@
             return false;
         }
 
-    }
+    }

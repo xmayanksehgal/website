@@ -56,16 +56,13 @@
                 }
 
                 if (empty($lang)){
-                    //detect browser lang
-                    $language = new \Browser\Language();
-                    $langBrowser = $language->getLanguage();
 
                     //if broswer lang is supported
-                    $lang = (in_array($langBrowser, $allCodes)) ? $langBrowser : $default;
+                    $lang = $default;
                 }
-                
 
-                //redirect, and start again 
+
+                //redirect, and start again
                 header("Location: " . \Controller\Router::url("home", array("lang" => $lang)));
                 die();
             }
@@ -175,4 +172,4 @@
         }
 
 
-    }
+    }

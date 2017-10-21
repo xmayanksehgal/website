@@ -20,7 +20,7 @@
             $view = new View("home.php", array(
                 "title" => _("The Universal Skills Map"),
                 "skillCount" => $statManager->countLabel("Skill"),
-                "wsUrl" => Config::CROSSBAR_WS_URL
+                // "wsUrl" => Config::CROSSBAR_WS_URL
             ));
             $view->send();
         }
@@ -39,7 +39,7 @@
                     "title"     => _("Explore"),
                     "userClass" => $this->getUserClass(),
                     "skillCount" => $statManager->countLabel("Skill"),
-                    "wsUrl" => Config::CROSSBAR_WS_URL
+                    // "wsUrl" => Config::CROSSBAR_WS_URL
                 )
             );
             $view->setLayout("../View/layouts/graph.php");

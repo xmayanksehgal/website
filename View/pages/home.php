@@ -36,6 +36,6 @@
 	<div class="container">
 		<h2>Ready to go?</h2>
 		<p>Start exploring skills and add your own!</p>
-		<div id="home-btn-go-bottom" class="home-btn"><a href="<?= \Controller\Router::url("graph"); ?>">Enter SpringRole Skill Project</a></div>
+		<div id="home-btn-go-bottom" class="home-btn"><a href="<?= \Controller\Router::url("graph"); ?>">Enter Skill Project</a></div>
 	</div> 
 </section>
