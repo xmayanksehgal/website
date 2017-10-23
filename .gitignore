@@ -3,3 +3,4 @@
 web/img/._*
 vendor/
 node_modules/
+env.list

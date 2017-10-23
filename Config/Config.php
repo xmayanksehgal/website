@@ -9,10 +9,19 @@
         const DOMAIN        = 'localhost';
         const DEFAULT_LOCALE= 'en';
 
-        const NEO_HOST      = $_ENV['DB_HOST'];
-        const NEO_PORT      = $_ENV['DB_PORT'];
+        protected $NEO_HOST      = null;
+        protected $NEO_PORT      = null;
+        protected $NEO_PASSWORD  = null;
+        protected $GOOGLE_TRANSLATE_API_KEY = null;
+
+        function __construct() {
+            $this->NEO_HOST = getenv('DB_HOST');
+            $this->NEO_PORT = getenv('DB_PORT');
+            $this->NEO_PASSWORD = getenv('DB_PASS');
+            $this->GOOGLE_TRANSLATE_API_KEY = getenv('GT_API');
+        }
+
         const NEO_USERNAME      = 'website-connection-aws';
-        const NEO_PASSWORD  = $_ENV['DB_PASS'];
 
         const CROSSBAR_WS_PORT      = _CROSSBAR_WS_PORT;  // 8080/
         const CROSSBAR_WS_URL       = _CROSSBAR_WS_URL;  // ws://127.0.0.1:8080/ws
@@ -27,9 +36,7 @@
 
         const MANDRILL_KEY  = 'glIy6VMjJB5qi32A1a5qSg';
 
-        const GOOGLE_TRANSLATE_API_KEY = $_ENV['GT_API'];
-
-        const VANILLA_URL	= 'http://vanilla.skill-project.org/;
+        const VANILLA_URL	= 'http://vanilla.skill-project.org/';
 
         const GA_ACCOUNT = 'UA-12349595';
 
