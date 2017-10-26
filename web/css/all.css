@@ -227,7 +227,7 @@ input {
 /* Tourbus leg arrow */
 .tourbus-arrow:before,
 .tourbus-arrow:after {
-  border: solid transparent;
+  border: solid rgba(0, 0, 0, 0);
   content: " ";
   height: 0;
   width: 0;

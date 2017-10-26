@@ -84,6 +84,6 @@
     <?php else: ?>
     <script src="js/all.min.js"></script>
     <?php endif; ?>
-<?php 
-    include("../View/inc/analytics.js"); 
+<?php
+    include("../View/inc/analytics.js");
 ?>
