@@ -1,0 +1,105 @@
+$darkerBlue: #10a0ac;
+
+/* Editor Dashboard */
+.editor {
+
+    font-size: 14px;
+
+    td, th {
+        padding: 5px 25px 5px 0;
+    }
+
+    th {
+        text-transform: uppercase;
+        text-align: left;
+        padding: 25px 25px 25px 0;
+    }
+
+    tr:nth-child(even) {
+        background-color: #EBEBEB;
+    }
+
+    h2 {
+        text-transform: uppercase;
+    }
+
+    #loader {
+        position: relative;
+        top: auto;
+        left: auto;
+        z-index: auto;
+        width: 30px;
+        height: 30px;
+        margin: 0 auto;
+        display:none;
+        margin-top:20px;
+    }
+
+    #editor-tabs-nav {
+
+        width: 100%;
+        border-bottom: 5px solid #BDEACB;
+
+        li {
+            float: left;
+            margin-right: 5px;
+        }
+
+        a {
+            padding: 20px 30px;
+            display: block;
+            text-transform: uppercase;
+            color: #000;
+            background-color: #EBEBEB;
+        }
+
+        li.selected a {
+            background-color: #BDEACB;
+        }
+    }
+
+    .editor-dashboard-content {
+        h4 {
+            background-color: #BDEACB;
+            display: inline-block;
+            padding: 5px 10px;
+        }
+
+        #show-more {
+            font-weight: bold;
+            display: block;
+            text-align: center;
+            border: 1px solid black;
+            width: 200px;
+            margin: 0 auto;
+            padding: 10px;
+            margin-top: 20px;
+            border:1px solid $darkerBlue;
+        }
+    }
+
+    #recent-discussions-table {
+        th.date {
+            width: 150px;
+        }
+    }
+
+    #recent-activity-table {
+        th.date { width: 13.2%; }
+        th.skill { width: 32.8%; }
+        th.user { width: 6.3%; }
+        th.action { width: 37.7% ;}
+    }
+
+    #recent-discussions-table {
+        th.date { width: 15%; }
+        th.skill { width: 30%; }
+        th.user { width: 11%; }
+        th.message { width: 29% ;}
+
+        td.message {
+            word-break: break-word;
+        }
+    }
+
+}
