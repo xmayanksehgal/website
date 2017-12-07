@@ -39,6 +39,6 @@ class User extends Model
 
     public function EditorRequest()
     {
-        return $this->belongsTo('App\Model\EditorRequest');
+        return $this->hasOne('App\Model\EditorRequest','applied_by','id');
     }
 }

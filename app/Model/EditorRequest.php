@@ -10,6 +10,6 @@ class EditorRequest extends Model
 
     public function User()
     {
-        return $this->hasOne('App\Model\User');
+        return $this->belongsTo('App\Model\User');
     }
 }

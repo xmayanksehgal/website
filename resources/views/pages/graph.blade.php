@@ -1,4 +1,4 @@
-<div id="preload">
+	<div id="preload">
 	<img src="img/node/node-sun.png" id="node-sun" />	
 
 	<img src="img/node/node-normal.png" id="node-normal" />	
@@ -27,7 +27,7 @@
 </div>
 <header id="header">
 	<div id="header-container">
-		<?php include("../View/inc/header.php"); ?>
+		@include('inc.header')
 	</div>
 </header>
 <div id="backdrop"></div>
@@ -38,15 +38,7 @@
 	<div id="debug">
 		
 	</div>
-	<div id="footer-container" class="container">
-        <form id="search-form" method="GET" action="<?= \Controller\Router::url("skillSearch"); ?>">
-		<div id="autocomplete-container">
-			<div id="search-results"></div>
-			<input type="search" name="q" id="kw-input" value="" autocomplete="off" placeholder="<?=sprintf(_("SEARCH A SKILL (%s)"), $skillCount); ?>" />
-		</div>
-		</form>
 
-	</div>
 </div>
 <ol class='tourbus-legs' id='my-tour-id'>
   <li id="tour-leg1" data-orientation="left" data-arrow="false">

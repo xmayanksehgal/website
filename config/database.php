@@ -78,6 +78,14 @@ return [
             'prefix' => '',
         ],
 
+        'neo4j' => [
+            'driver' => 'neo4j',
+            'host' => env('GDB_HOST', '127.0.0.1'),
+            'port' => env('GDB_PORT', '7474'),
+            'username' => env('GDB_USERNAME', 'forge'),
+            'password' => env('GDB_PASSWORD', 'forge'),
+        ],
+
     ],
 
     /*

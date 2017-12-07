@@ -26,7 +26,13 @@ if ($page == '/')
             <ul>
                 <li><a href="" title=""><?= _("The Skills"); ?></a></li>
                 <li><a title="" href="/project"><?= _("The project"); ?></a></li>
-                <li><a class="register-link" href="" title="<?= _("Register!"); ?>"><?= _("Profile"); ?></a></li>
+                <?php
+                        if(Auth::user())
+                            {?>
+                                <li><a href="/profile" title="<?= _("Register!"); ?>"><?= _("Profile"); ?></a></li>
+                            <?php
+                            }
+                ?>
                 <li><a href="/apply" title="<?= _("Become part of the project!"); ?>"><?= _("Apply"); ?></a></li>
                 <li><a href="http://vanilla.skill-project.org/" title="The Skill Project Community"><?= _("Community"); ?></a></li>
                 <li><a href="/contact" title="<?= _("Contact us"); ?>"><?= _("Contact"); ?></a></li>

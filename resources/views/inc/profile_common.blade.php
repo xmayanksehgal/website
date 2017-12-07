@@ -3,7 +3,7 @@
         <?php
         $user = Auth::user();
         ?>
-        <h2><?= sprintf(_("%s'S PROFILE"),strtoupper($user->username), "utf-8"); ?></h2>
+        <h2><?= strtoupper($user->username); ?>'s PROFILE</h2>
     </div>
 </header>
 <section>
@@ -29,13 +29,5 @@
                 </div>
             </div>
             <br />
-            <?php
-            //own profile ?
-            $loggedUser = Auth::user();
-            if ($loggedUser->username == $user->username):
-            ?>
-            <a href="" title="<?= _("Edit your profile"); ?>"><b><?= _("Edit your profile"); ?></b></a>
-            <?php endif; ?>
+            <a href="/profile/edit/{{Auth::user()->id}}" title="<?= _("Edit your profile"); ?>"><b><?= _("Edit your profile"); ?></b></a>
         </div>
-    </div>
-</section>

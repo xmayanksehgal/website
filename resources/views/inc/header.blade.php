@@ -11,7 +11,7 @@
             | <li><a class="login-link" href="/login" title="Login"><?= _("Sign in"); ?></a></li>
             <?php
                 else:?>
-                <li><a class="white-link register-link" href="/profile" title="Profile"><?= Auth::user()->username ?></a></li>
+                <li><a class="white-link" href="/profile" title="Profile"><?= Auth::user()->username ?></a></li>
                 | <li>
                     <a href="{{ route('logout') }}"
                        onclick="event.preventDefault();
