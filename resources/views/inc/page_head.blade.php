@@ -3,7 +3,7 @@
 <meta name="description" content="Explore all the human skills. Map them out.">
 <base href="/" />
 <meta name="viewport" content="width=1050">
-<link rel="shortcut icon" href="../../../public/img/favicon.png">
+<link rel="shortcut icon" href="/img/favicon.png">
 {{--<script src="scripts/js-translations.js"></script>--}}
 <link href="{{ asset('css/all.css') }}" rel="stylesheet">
 <script src="{{ asset('js/jquery-2.1.1.min.js')}}"></script>

@@ -11,7 +11,7 @@ if ($page == '/')
 <div id="wrapper">
     <header id="header">
         <div id="header-container">
-            @include("inc/header")
+            @include("inc.header")
         </div>
     </header>
     <div id="main-content">

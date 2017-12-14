@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Model;
-
+use App\Model\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 
-class SkillBaseManager extends Model
+class SkillBaseManager extends BaseModel
 {
     //uuid in BaseModel
     protected $name;

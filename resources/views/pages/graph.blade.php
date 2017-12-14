@@ -1,3 +1,5 @@
+@extends('layouts.graph')
+@section('content')
 	<div id="preload">
 	<img src="img/node/node-sun.png" id="node-sun" />	
 
@@ -15,7 +17,7 @@
 	<img src="img/node/node-edit-t.png" id="node-edit-t" />
 
 	<?php
-	// <img src="img/node-normal-t-on.png" id="node-normal-t-on" />	
+	// <img src="img/node-normal-t-on.png" id="node-normal-t-on" />
 	// <img src="img/node-glow-nochildren-t-on.png" id="node-glow-nochildren-t-on" />
 	// <img src="img/node-glow-children-t-on.png" id="node-glow-children-t-on" />
 	// <img src="img/node-edit-t-on.png" id="node-edit-t-on" />
@@ -65,3 +67,4 @@
     <a href='javascript:void(0);' class='tourbus-next'><?=_("Finish")?></a>
   </li>
 </ol>
+@endsection

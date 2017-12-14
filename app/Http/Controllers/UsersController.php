@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\User;
 use App\Model\EditorRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
@@ -85,5 +86,17 @@ class UsersController extends Controller
         else {
             return view('modals.change_password');
         }
+    }
+
+    public static function getUserClass()
+    {
+        if(Auth::guest()):
+            $userClass = "anonymous";
+        else:
+            $id = Auth::user()->id;
+            $user = User::find($id);
+            $userClass = $user->role;
+        endif;
+        return $userClass;
     }
 }

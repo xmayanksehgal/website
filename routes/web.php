@@ -64,7 +64,9 @@ Route::match(['get', 'post'],'/change_password/{id}', [
     'uses' => 'UsersController@changePassword'
 ]);
 
-Route::get('/graph', ['uses' => 'GraphController@graph']);
+//Route::get('/graph', ['uses' => 'GraphController@graphAction']);
+Route::get('/graph', ['uses' => 'GraphController@graphAction']);
+
 Route::get('/users', ['uses' => 'UsersController@index']);
 Route::get('/editors_requests', ['uses' => 'EditorController@index']);
 Route::get('/skill_requests', ['uses' => 'SkillController@index']);
@@ -72,3 +74,12 @@ Route::get('/skill_requests', ['uses' => 'SkillController@index']);
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/maintenance', function () {
+    return view('maintenance');
+});
+
+Route::get('/resources/views/layouts/graph', function () {
+    return view('layouts.graph');
+});
+

@@ -3,7 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
-use GraphAware\Neo4j\Client\ClientBuilder;
+
 
 class BaseModel extends Model
 {
@@ -16,9 +16,13 @@ class BaseModel extends Model
     public function __construct()
     {
         parent::__construct();
-        $client = ClientBuilder::create()
-            ->addConnection('default', 'http://'.env('GDB_CONNECTION').':'.env('GDB_PASSWORD').'@'.env('GDB_HOST').':'.env('GDB_PORT')) // Example for HTTP connection configuration (port is optional)
-            ->build();
+
+        $this->client = new \Everyman\Neo4j\Client((new \Everyman\Neo4j\Transport\Curl(env('GDB_HOST'),env('GDB_PORT')))
+            ->setAuth(env('GDB_USERNAME'),env('GDB_PASSWORD')));
+//        $client = ClientBuilder::create()
+//            ->addConnection('default', 'http://'.env('GDB_CONNECTION').':'.env('GDB_PASSWORD').'@'.env('GDB_HOST').':'.env('GDB_PORT')) // Example for HTTP connection configuration (port is optional)
+//            ->build();
+
     }
 
     public function getId(){
