@@ -79,7 +79,4 @@ Route::get('/maintenance', function () {
     return view('maintenance');
 });
 
-Route::get('/resources/views/layouts/graph', function () {
-    return view('layouts.graph');
-});
-
+Route::get('scripts/js-translations.js', ['uses' => 'GraphController@getJSTranslationsAction']);

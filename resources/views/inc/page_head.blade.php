@@ -4,8 +4,10 @@
 <base href="/" />
 <meta name="viewport" content="width=1050">
 <link rel="shortcut icon" href="/img/favicon.png">
-{{--<script src="scripts/js-translations.js"></script>--}}
+
+<script src="{{ asset("js/all.min.js")}}"></script>
 <link href="{{ asset('css/all.css') }}" rel="stylesheet">
+{{--<script src="scripts/js-translations.js"></script>--}}
 <script src="{{ asset('js/jquery-2.1.1.min.js')}}"></script>
 <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('js/jquery.mousewheel.min.js') }}"></script>

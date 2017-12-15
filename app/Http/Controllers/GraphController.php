@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\JSTranslations;
 use App\Model\StatManager;
 use Controller\UserController;
 use Illuminate\Http\Request;
@@ -36,4 +37,12 @@ class GraphController extends Controller
         );
         return view('pages.graph',['data'=> $data]);
     }
+
+    public function getJSTranslationsAction(){
+
+        $jsTrans = new JSTranslations();
+        header("Content-type: application/javascript");
+        echo "var jt = " . json_encode($jsTrans->getJSTranslations(), JSON_PRETTY_PRINT);
+    }
+
 }

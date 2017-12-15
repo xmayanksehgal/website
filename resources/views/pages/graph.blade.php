@@ -1,6 +1,6 @@
 @extends('layouts.graph')
 @section('content')
-	<div id="preload">
+	<div id="preload" style="display: none;">
 	<img src="img/node/node-sun.png" id="node-sun" />	
 
 	<img src="img/node/node-normal.png" id="node-normal" />	
@@ -32,7 +32,7 @@
 		@include('inc.header')
 	</div>
 </header>
-<div id="backdrop"></div>
+<div id="backdrop" style="display: block; width: 806px; height: 715px; visibility: visible;"></div>
 <div id="kinetic"></div>
 <div id="panel"></div>
 <div id="footer">
