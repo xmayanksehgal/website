@@ -32,7 +32,7 @@
 		@include('inc.header')
 	</div>
 </header>
-<div id="backdrop" style="display: block; width: 806px; height: 715px; visibility: visible;"></div>
+<div id="backdrop"></div>
 <div id="kinetic"></div>
 <div id="panel"></div>
 <div id="footer">
@@ -40,7 +40,15 @@
 	<div id="debug">
 		
 	</div>
+	<div id="footer-container" class="container">
+        <form id="search-form" method="GET" action="/api/skillSearch/">
+		<div id="autocomplete-container">
+			<div id="search-results"></div>
+			<input type="search" name="q" id="kw-input" value="" autocomplete="off" placeholder="SEARCH A SKILL (2195)" />
+		</div>
+		</form>
 
+	</div>
 </div>
 <ol class='tourbus-legs' id='my-tour-id'>
   <li id="tour-leg1" data-orientation="left" data-arrow="false">
