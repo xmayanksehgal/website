@@ -1,6 +1,6 @@
 <div id="translate-skill-panel" class="panel-content">
 
-    <?php include("subpanel-top.php") ?>
+    <?php include("subpanel-top.blade.php") ?>
 
     <h3><?= _("TRANSLATE"); ?></h3>
     <form method="POST" action="<?= \Controller\Router::url("translateSkill"); ?>" id="translate-skill-form">
@@ -26,8 +26,8 @@
 
     <h4><?= _("OTHER TRANSLATIONS"); ?></h4>
     <ul id="other-translations-list">
-        <?php include("skill-translations.php"); ?>
+        <?php include("skill-translations.blade.php"); ?>
     </ul>
 
-    <?php include("panel-bottom.php"); ?>
+    <?php include("panel-bottom.blade.php"); ?>
 </div>

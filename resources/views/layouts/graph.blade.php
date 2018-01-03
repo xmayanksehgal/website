@@ -5,7 +5,7 @@ if ($page == '/skills')
     $pageName = "graph";
 ?>
 <!DOCTYPE html>
-<html lang="fr" class="graph">
+<html lang="en" class="graph">
 <head>
     @include("inc.page_head")
 </head>

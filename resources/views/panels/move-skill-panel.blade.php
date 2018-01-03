@@ -1,6 +1,6 @@
 <div id="move-skill-panel" class="panel-content">
 
-    <?php include("subpanel-top.php") ?>
+    <?php include("subpanel-top.blade.php") ?>
 
     <h3><?= _("MOVE SKILL"); ?></h3>
     <form method="POST" action="<?= \Controller\Router::url("moveSkill"); ?>" id="move-skill-form">
@@ -32,5 +32,5 @@
         </div>
     </form>
 
-    <?php include("panel-bottom.php"); ?>
+    <?php include("panel-bottom.blade.php"); ?>
 </div>

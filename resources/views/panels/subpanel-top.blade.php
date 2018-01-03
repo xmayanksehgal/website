@@ -5,7 +5,7 @@
                     <?= _("EDIT SKILL"); ?>
                 </a>
                 <a href="#" title="<?= _("Close this panel"); ?>" class="close-panel-btn"><img src="img/panel-icon-close.png" alt="X" /></a>
-                <p class="skillName">"<?= $skill->getLocalName(); ?>"</p>
+                <p class="skillName">"<?= $param['skill']->getLocalName(); ?>"</p>
             </div>
 
             <hr />

@@ -23,13 +23,13 @@ Route::get('/apply', function () {
     return view('pages/apply');
 });
 
-Route::get('/404', function () {
+Route::get('/fourofour', function () {
     return view('pages/fourofour');
 });
 
-Route::get('/skills', function () {
-    return view('pages/graph');
-});
+//Route::get('/skills', function () {
+//    return view('pages/graph');
+//});
 
 Route::get('/legal', function () {
     return view('pages/legal');
@@ -65,7 +65,9 @@ Route::match(['get', 'post'],'/change_password/{id}', [
 ]);
 
 //Route::get('/graph', ['uses' => 'GraphController@graphAction']);
-Route::get('/graph', ['uses' => 'GraphController@graphAction']);
+Route::get('/skills', ['uses' => 'GraphController@graphAction']);
+
+Route::get('/export', ['uses' => 'DumpController@generateDumpAction']);
 
 Route::get('/users', ['uses' => 'UsersController@index']);
 Route::get('/editors_requests', ['uses' => 'EditorController@index']);
@@ -79,4 +81,35 @@ Route::get('/maintenance', function () {
     return view('maintenance');
 });
 
-Route::get('scripts/js-translations.js', ['uses' => 'GraphController@getJSTranslationsAction']);
+//Route::get('scripts/js-translations.js', ['uses' => 'GraphController@getJSTranslationsAction']);
+
+Route::get('/api/getNodeChildren/{uuid}', [
+//    'as'=>'pages.edit_profile',
+    'uses' => 'ApiController@getNodeChildrenAction'
+]);
+
+Route::get('/panel/getPanel/{uuid}', [
+    'uses' => 'PanelContoller@getPanelAction'
+]);
+
+//Route::get('/panel/{uuid}', [
+//    'uses' => 'PanelController@getPanelAction'
+//]);
+
+Route::post('api/renameSkill', [
+    'uses' => 'ApiController@getPanelAction'
+]);
+
+
+Route::post('api/addSkill', [
+    'uses' => 'ApiController@getPanelAction'
+]);
+
+Route::get('goTo/{slug}', [
+    'as' => 'goToSlug',
+    'uses' => 'GraphController@goToAction'
+]);
+
+Route::get('skillHistory', [
+    'uses' => 'ApiController@skillHistoryAction'
+]);

@@ -1,10 +1,10 @@
 <div id="discuss-skill-panel" class="panel-content">
 
-    <?php include("subpanel-top.php") ?>
+    @include("panels/subpanel-top")
 
     <h3><?= _("DISCUSS THE SKILL"); ?></h3>
-    <form method="POST" action="<?= \Controller\Router::url("discussSkill"); ?>" id="discuss-skill-form">
-        <input type="hidden" name="skillUuid" id="discuss-skillUuid" value="<?= $skill->getUuid(); ?>" />
+    <form method="POST" action="<?="/api/discussSkill" ?>" id="discuss-skill-form">
+        <input type="hidden" name="skillUuid" id="discuss-skillUuid" value="<?= $param['skill']->getUuid(); ?>" />
         <div>
             <?=_("In english please!");?>
             <?php
@@ -26,8 +26,9 @@
         
     <hr />
     <div class="discuss-prev-messages">
-        <?php include("discussion-messages.php"); ?>
+        @include("panels.discussion-messages")
     </div>
 
-    <?php include("panel-bottom.php"); ?>
+    @include("panels.panel-bottom")
+
 </div>

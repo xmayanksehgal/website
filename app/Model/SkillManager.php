@@ -57,7 +57,6 @@ class SkillManager extends Model
                         break;
                     }
                 }
-
                 //else append
                 if (!$found){
                     $csvData[] = $csvRow;
@@ -436,106 +435,106 @@ class SkillManager extends Model
      * @param string The uuid of the current user
      * @return bool Return true on success
      */
-//    public function save(Skill $skill, $skillParentUuid, $userUuid){
-//
-//
-//        //intentionnally not saving caps, as they are not added at skill creation
-//        $cyp = "MATCH
-//                    (parent:Skill {uuid: {parentUuid}}),
-//                    (user:User {uuid: {userUuid}})
-//                    CREATE (parent)
-//                    -[:HAS {
-//                        since: {now}
-//                    }]->
-//                    (skill:Skill {
-//                        uuid: {skillUuid},
-//                        name: {name},
-//                        slug: {slug},
-//                        depth: {depth},
-//                        childrenCount: 0,
-//                        created: {now},
-//                        modified: {now}
-//                        **trans**
-//                    })<-[:CREATED {
-//                        timestamp: {now},
-//                        originalName: {originalName}
-//                    }]-(user)";
-//
-//
-//        $namedParams = array(
-//            "now" => time(),
-//            "skillUuid" => $skill->getUuid(),
-//            "name" => $skill->getName(),
-//            "slug" => $skill->getSlug(),
-//            "depth" => $skill->getDepth(),
-//            "userUuid" => $userUuid,
-//            "parentUuid" => $skillParentUuid,
-//            "originalName" => $skill->getName()
-//        );
-//
-//        //dynamic shit for translations
-//        $transString = "";
-//        foreach($skill->getTranslations() as $code => $name){
-//            if ($code == "en"){continue;} //do not save english trans
-//            $transString .= ", l_".$code.": {l_".$code."_name}";
-//            $namedParams["l_".$code."_name"] = $name;
-//        }
-//        $cyp = str_replace("**trans**", $transString, $cyp);
-//
-//        $query = new Query($this->client, $cyp, $namedParams);
-//        $resultSet = $query->getResultSet();
-//
-//        $this->updateChildrenCount($skillParentUuid);
-//
-//        return true;
-//    }
+    public function saveSkill(Skill $skill, $skillParentUuid, $userUuid){
+
+
+        //intentionally not saving caps, as they are not added at skill creation
+        $cyp = "MATCH
+                    (parent:Skill {uuid: {parentUuid}}),
+                    (user:User {uuid: {userUuid}})
+                    CREATE (parent)
+                    -[:HAS {
+                        since: {now}
+                    }]->
+                    (skill:Skill {
+                        uuid: {skillUuid},
+                        name: {name},
+                        slug: {slug},
+                        depth: {depth},
+                        childrenCount: 0,
+                        created: {now},
+                        modified: {now}
+                        **trans**
+                    })<-[:CREATED {
+                        timestamp: {now},
+                        originalName: {originalName}
+                    }]-(user)";
+
+
+        $namedParams = array(
+            "now" => time(),
+            "skillUuid" => $skill->getUuid(),
+            "name" => $skill->getName(),
+            "slug" => $skill->getSlug(),
+            "depth" => $skill->getDepth(),
+            "userUuid" => $userUuid,
+            "parentUuid" => $skillParentUuid,
+            "originalName" => $skill->getName()
+        );
+
+        //dynamic shit for translations
+        $transString = "";
+        foreach($skill->getTranslations() as $code => $name){
+            if ($code == "en"){continue;} //do not save english trans
+            $transString .= ", l_".$code.": {l_".$code."_name}";
+            $namedParams["l_".$code."_name"] = $name;
+        }
+        $cyp = str_replace("**trans**", $transString, $cyp);
+
+        $query = new Query($this->client, $cyp, $namedParams);
+        $resultSet = $query->getResultSet();
+
+        $this->updateChildrenCount($skillParentUuid);
+
+        return true;
+    }
 
 
 
     /**
      * Update an existing skill
      */
-//    public function update(Skill $skill, $userUuid, $previousName = ""){
-//
-//        //first regenerate the slug if name changed
-//        //we can do that since only the uuid part of the slug is used to retrieve from slug
-//        $skill->regenerateSlug();
-//
-//        $cyp = "MATCH (skill:Skill {uuid:{skillUuid}}), (user:User {uuid: {userUuid}})
-//                    SET skill.name = {name},
-//                        skill.slug = {slug},
-//                        skill.depth = {depth},
-//                        skill.modified = {now}
-//                        **trans**
-//                    CREATE (skill)<-[:MODIFIED {
-//                        timestamp: {now}, fromName: {fromName}, toName: {toName}
-//                    }]-(user)";
-//
-//        $namedParams = array(
-//            "now" => time(),
-//            "skillUuid" => $skill->getUuid(),
-//            "name" => $skill->getName(),
-//            "slug" => $skill->getSlug(),
-//            "depth" => $skill->getDepth(),
-//            "userUuid" => $userUuid,
-//            "fromName" => $previousName,
-//            "toName" => $skill->getName()
-//        );
-//
-//        //dynamic shit for translations
-//        $transString = "";
-//        foreach($skill->getTranslations() as $code => $name){
-//            if ($code == "en"){continue;} //do not save english trans
-//            $transString .= ", skill.l_".$code." = {l_".$code."_name}";
-//            $namedParams["l_".$code."_name"] = $name;
-//        }
-//        $cyp = str_replace("**trans**", $transString, $cyp);
-//
-//        $query = new Query($this->client, $cyp, $namedParams);
-//        $resultSet = $query->getResultSet();
-//
-//        return true;
-//    }
+    public function updateSkill(Skill $skill, $userUuid, $previousName = ""){
+
+        //first regenerate the slug if name changed
+        //we can do that since only the uuid part of the slug is used to retrieve from slug
+        $skill->regenerateSlug();
+
+        $cyp = "MATCH (skill:Skill {uuid:{skillUuid}}), (user:User {uuid: {userUuid}})
+                    SET skill.name = {name},
+                        skill.slug = {slug},
+                        skill.depth = {depth},
+                        skill.modified = {now}
+                        **trans**
+                    CREATE (skill)<-[:MODIFIED {
+                        timestamp: {now}, fromName: {fromName}, toName: {toName}
+                    }]-(user)";
+
+        $namedParams = array(
+            "now" => time(),
+            "skillUuid" => $skill->getUuid(),
+            "name" => $skill->getName(),
+            "slug" => $skill->getSlug(),
+            "depth" => $skill->getDepth(),
+            "userUuid" => $userUuid,
+            "fromName" => $previousName,
+            "toName" => $skill->getName()
+        );
+
+        //dynamic shit for translations
+        $transString = "";
+        foreach($skill->getTranslations() as $code => $name){
+            if ($code == "en"){continue;} //do not save english trans
+            $transString .= ", skill.l_".$code." = {l_".$code."_name}";
+            $namedParams["l_".$code."_name"] = $name;
+        }
+        $cyp = str_replace("**trans**", $transString, $cyp);
+
+        $query = new Query($this->client, $cyp, $namedParams);
+        $resultSet = $query->getResultSet();
+
+        return true;
+    }
 
 
     /**

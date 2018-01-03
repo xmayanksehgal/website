@@ -38,7 +38,8 @@
     <div class="container">
         <h2>Ready to go?</h2>
         <p>Start exploring skills and add your own!</p>
-        <div id="home-btn-go-bottom" class="home-btn"><a href="">Enter Skill Project</a></div>
+        <div id="home-btn-go-bottom" class="home-btn"><a href="/skills">Enter Skill Project</a></div>
+        <p>You can also download the Skill-Project Data Dump <a href="/export">here</a>.</p>
     </div> 
 </section>
 @endsection

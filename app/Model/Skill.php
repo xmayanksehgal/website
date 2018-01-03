@@ -3,8 +3,7 @@
     namespace App\Model;
 
     use \Everyman\Neo4j\Node;
-    use \Cocur\Slugify\Slugify;
-    use \Config\Config;
+    use Cocur\Slugify\Slugify;
 
     class Skill extends Entity {
 
@@ -17,7 +16,7 @@
         protected $capNoMore;
 
         protected $translations = array();
-        
+
         protected $node = null;
 
         protected $childrenCount;
@@ -173,11 +172,12 @@
          */
         public function getLocalName(){
             $name = $this->getName();
-            if ($GLOBALS['lang'] != \Config\Config::DEFAULT_LOCALE){
-                if ($this->getTranslation($GLOBALS['lang'])){
-                    $name = $this->getTranslation($GLOBALS['lang']);
-                }
-            }
+////            if ($GLOBALS['lang'] != \Config\Config::DEFAULT_LOCALE){
+//            if ($GLOBALS['lang'] != 'en'){
+//                if ($this->getTranslation($GLOBALS['lang'])){
+//                    $name = $this->getTranslation($GLOBALS['lang']);
+//                }
+//            }
             return $name;
         }
 

@@ -1,4 +1,4 @@
-<a id="main-logo" href="" title="Skill Project | Home"><img src="img/logo-header.png" /></a>
+<a id="main-logo" href="" title="Skill Project | Home"><img src="img/skill-project.png" /></a>
 
 <div id="header-right">
     <nav id="top-user-nav">

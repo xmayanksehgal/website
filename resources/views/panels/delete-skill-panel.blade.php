@@ -1,6 +1,6 @@
 <div id="delete-skill-panel" class="panel-content">
 
-    <?php include("subpanel-top.php") ?>
+    <?php include("subpanel-top.blade.php") ?>
 
     <h3><?= _("DELETE SKILL"); ?></h3>
     <form method="POST" action="<?= \Controller\Router::url("deleteSkill"); ?>" id="delete-skill-form">
@@ -26,5 +26,5 @@
         <p><?= _("You cannot delete a skill if it has children."); ?></p>
     </div>
 
-    <?php include("panel-bottom.php"); ?>
+    <?php include("panel-bottom.blade.php"); ?>
 </div>

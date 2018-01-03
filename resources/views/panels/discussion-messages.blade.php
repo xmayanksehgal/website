@@ -1,5 +1,5 @@
 
-    <?php foreach($messages as $message): ?>
+    <?php foreach($param['messages'] as $message): ?>
     <div class="message">
         <div class="by">
             <?php if ($message['userActive']): ?>
