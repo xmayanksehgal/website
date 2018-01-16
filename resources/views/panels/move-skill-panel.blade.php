@@ -1,10 +1,11 @@
 <div id="move-skill-panel" class="panel-content">
 
-    <?php include("subpanel-top.blade.php") ?>
+    @include("panels/subpanel-top")
 
     <h3><?= _("MOVE SKILL"); ?></h3>
-    <form method="POST" action="<?= \Controller\Router::url("moveSkill"); ?>" id="move-skill-form">
-        <input type="hidden" name="selectedSkillUuid" id="selectedSkillUuid" value="<?= $skill->getUuid(); ?>" />
+    <form method="POST" action="{{ route('moveSkill') }}" id="move-skill-form">
+        {{ csrf_field() }}
+        <input type="hidden" name="selectedSkillUuid" id="selectedSkillUuid" value="<?= $param['skill']->getUuid(); ?>" />
         <input type="hidden" name="destinationUuid" id="destinationUuid" value="" />
         <input type="hidden" name="moveType" id="moveType" value="move" />
         <?php /* ?>
@@ -32,5 +33,5 @@
         </div>
     </form>
 
-    <?php include("panel-bottom.blade.php"); ?>
+    @include("panels.panel-bottom")
 </div>

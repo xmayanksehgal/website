@@ -9,7 +9,7 @@ if ($page == '/skills')
 <head>
     @include("inc.page_head")
 </head>
-<body class="<?= $data['userClass'] . " graph" ?> " style="height: 715px; cursor: default;">
+<body class="<?= $data['userClass'] . " graph" ?> " style="height: 715px; cursor: default;" onload="loadJSTranslations()">
     @yield('content')
 </body>
 </html>

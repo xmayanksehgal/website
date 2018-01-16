@@ -4,11 +4,11 @@
             <h2>Sign In</h2>
         </header>
         <div id="modal-content">
-            <form class="form_details">
-                {{csrf_field()}}
+            <form class = 'form_details'>
+            {{csrf_field()}}
                 <div>
                     <label for="loginUsername"><?php echo _("USERNAME OR EMAIL") ?></label>
-                    <input type="text" name="email" id="email" value="" required />
+                    <input type="text" name="loginUsername" id="loginUsername" value="" required />
                 </div>
                 <div>
                     <label for="password"><?php echo _("PASSWORD") ?></label>

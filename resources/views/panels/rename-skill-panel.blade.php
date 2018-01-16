@@ -1,9 +1,10 @@
 <div id="rename-skill-panel" class="panel-content">
 
-    <?php include("subpanel-top.blade.php") ?>
+    @include("panels/subpanel-top")
 
     <h3><?= _("RENAME"); ?></h3>
-    <form method="POST" action="<?= "/api/renameSkill"; ?>" id="rename-skill-form">
+    <form method="POST" action="{{ route('renameSkill') }}" id="rename-skill-form">
+        {{ csrf_field() }}
         <input type="hidden" name="skillUuid" id="skillUuid" value="<?= $param['skill']->getUuid(); ?>" />
         <div>
             <input type="text" name="skillName" id="rename-skillName" maxlength="45" value="<?= $param['skill']->getLocalName(); ?>" />
@@ -26,5 +27,5 @@
         </div>
     <?php endif; ?>
 
-    <?php include("panel-bottom.blade.php"); ?>
+    @include("panels.panel-bottom")
 </div>

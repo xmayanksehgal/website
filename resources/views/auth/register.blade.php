@@ -9,20 +9,12 @@
                 <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                     <label for="username"><?= _("USERNAME") ?></label>
                     <input type="text" name="username" id="username" value="" required />
-                    @if ($errors->has('username'))
-                        <span class="help-block">
-                        	<strong>{{ $errors->first('username') }}</strong>
-                        </span>
-                    @endif
+                    <span id = "username-error" style="color: red" ></span>
                 </div>
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                     <label for="email"><?= _("EMAIL") ?></label>
                     <input type="email" name="email" id="email" value="" required />
-                    @if ($errors->has('email'))
-                        <span class="help-block">
-                        	<strong>{{ $errors->first('email') }}</strong>
-                        </span>
-                    @endif
+                    <span id = "email-error" style="color: red" ></span>
                 </div>
                 <div>
                     <label for="password"><?= _("PASSWORD") ?></label>
@@ -30,7 +22,8 @@
                 </div>
                 <div>
                     <label for="password_confirmation"><?= _("PASSWORD AGAIN") ?></label>
-                    <input type="password" name="password_confirmation" id="password_confirmation" required />
+                    <input type="password" name="password_bis" id="password_bis" required />
+                    <span id = "password-error" style="color: red" ></span>
                 </div>
                 <div class="submit-container">
                     <input id='register' type="button" value="<?= _("SIGN UP") ?>" />

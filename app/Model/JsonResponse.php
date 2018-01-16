@@ -1,6 +1,7 @@
 <?php
 
     namespace App\Model;
+    use App\Helpers\SecurityHelper as SH;
 
     class JsonResponse {
 
@@ -41,15 +42,14 @@
          */
         public function send(){
             $json = $this->getJson();
-
             //only allow request made by ajax
             if(empty($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
-                \Utils\SecurityHelper::forbid();
+                SH::forbid();
             }
             if (false){
                 header('Access-Control-Allow-Origin: *');  
             }
-            header('Content-Type: application/json');   
+            header('Content-Type: application/json');
             die($json);
         }
 

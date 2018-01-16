@@ -14,7 +14,8 @@
         <?php
         }
 ?>
-    <form method="POST" action="<?= '/api/addSkill' ?>" id="create-skill-form">
+    <form method="POST" action="{{ route('createSkill') }}" id="create-skill-form">
+        {{ csrf_field() }}
         <input type="hidden" name="selectedSkillUuid" id="selectedSkillUuid" value="<?= $param['skill']->getUuid(); ?>" />
         <input type="hidden" name="skillParentUuid" id="skillParentUuid" value="<?= $param['skill']->getUuid(); ?>" />
         <input type="hidden" name="creationType" id="creationType" value="child" />

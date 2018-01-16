@@ -4,13 +4,16 @@
 
     use \Everyman\Neo4j\Node;
     use \Everyman\Neo4j\Cypher\Query;
-    use \Config\Config;
+    use App\Model\Manager;
+
 
     class NotificationManager extends Manager {
 
-    	public function __construct() {
-    		parent::__construct();
-    	}
+        public function __construct(){
+            parent::__construct();
+            //$this->createSearchIndex();
+        }
+
 
         public function sendNotification($type, Skill $skill, array $params = array()) {
             extract($params);
@@ -45,7 +48,7 @@
 
             //relation between skill creator and notification
             $skillOwner = $currentSkill->getOwner();
-            $this->saveSingleRelationWithUser($skillOwner, $notificationUuid, "owner");
+//            $this->saveSingleRelationWithUser($skillOwner, $notificationUuid, "owner");
 
             //relations between people who discussed the skill and the notif
             $discussionManager = new DiscussionManager();
@@ -55,25 +58,26 @@
             //retrieve skill history to get users who renamed, translated or moved that skill
             $skillManager = new SkillManager();
             $history = $skillManager->getSkillHistory($currentSkill->getUuid(), 100);
-            
+
             //stores only the user uuids in arrays before calling methods that create the relations
             $usersWhoMoved = array();
             $usersWhoTranslated = array();
             $usersWhoRenamed = array();
-            foreach($history as $event){
-                switch($event['action']){
-                    case "MOVED":
-                        $userWhoMoved[] = $event['userProps']['uuid'];
-                        break;
-                    case "TRANSLATED":
-                        $usersWhoTranslated[] = $event['userProps']['uuid'];
-                        break;
-                    case "RENAMED":
-                        $userWhoRenamed[] = $event['userProps']['uuid'];
-                        break;
-                }
-            }
-
+//            TODO: Need to fix history and uncomment this.
+//            foreach($history as $event){
+//                switch($event['action']){
+//                    case "MOVED":
+//                        $userWhoMoved[] = $event['userProps']['uuid'];
+//                        break;
+//                    case "TRANSLATED":
+//                        $usersWhoTranslated[] = $event['userProps']['uuid'];
+//                        break;
+//                    case "RENAMED":
+//                        $userWhoRenamed[] = $event['userProps']['uuid'];
+//                        break;
+//                }
+//            }
+//
             //remove duplicates (like if a user discussed more than one time the same skill)
             $usersWhoMoved = array_unique($usersWhoMoved);
             $usersWhoRenamed = array_unique($usersWhoRenamed);
@@ -102,7 +106,7 @@
                         timestamp: {now}
                     })-[:IS_ABOUT]->(s)";
                 
-            $notificationUuid = \Utils\IdGenerator::getUniqueId();
+            $notificationUuid = str_replace(".", "f", uniqid('', true));
 
             $namedParams = array(
                 "now"               => time(),

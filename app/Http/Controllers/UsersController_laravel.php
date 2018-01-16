@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 
-class UsersController extends Controller
+class UsersController_laravel extends Controller
 {
     public function index()
     {
@@ -34,9 +34,9 @@ class UsersController extends Controller
         return view('pages.project');
     }
 
-    public function profile()
+    public function profile($username)
     {
-        return view('pages.profile');
+        return view('pages.profile',["username"=>$username]);
     }
 
     public function profileUpdate(Request $request, $id)

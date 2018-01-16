@@ -1,4 +1,4 @@
-<form method="POST" action="" id="apply-form">
+<form method="POST" action="{{Route('pages.apply')}}" id="apply-form">
     {{csrf_field()}}
     <div class="apply-section">
         <h3><?= _("PERSONAL INFORMATION"); ?></h3>
@@ -15,17 +15,17 @@
         <div class="row">
             <div>
                 <label for="languages"><?= _("Languages-s (Comma separated please)") ?></label>
-                <input type="text" name="languages_ip" id="languages" value="" required />
+                <input type="text" name="languages" id="languages" value="" required />
             </div>
             <div class="r">
                 <label for="update_freq"><?= _("How often do you plan to edit Skill Project?") ?></label>
                 <div class="select-border">
                     <select id="update_freq" name="update_freq" required>
-                        <option value="0"><?= _("Now and then"); ?></option>
-                        <option value="1"><?= _("At least once a month"); ?></option>
-                        <option value="2"><?= _("At least once a week"); ?></option>
-                        <option value="3"><?= _("For now, every day"); ?></option>
-                        <option value="4"><?= _("Any free time i have, it's for Skill Project"); ?></option>
+                        <option value="Now and then"><?= _("Now and then"); ?></option>
+                        <option value="At least once a month"><?= _("At least once a month"); ?></option>
+                        <option value="At least once a week"><?= _("At least once a week"); ?></option>
+                        <option value="For now, every day"><?= _("For now, every day"); ?></option>
+                        <option value="Any free time i have, it's for Skill Project"><?= _("Any free time i have, it's for Skill Project"); ?></option>
                     </select>
                 </div>
             </div>
@@ -34,7 +34,7 @@
     <div class="apply-section">
         <div>
             <label for="interests"><?= _("SKILLS OF INTEREST") ?></label>
-            <input type="text" name="interests" id="interests" value="" required />
+            <input type="text" name="interests" id="interests" value="<?=(empty($params['loggedUser'])) ? "" :  $params['loggedUser']->getInterests() ?>" required />
         </div>
     </div>
     <div class="apply-section">

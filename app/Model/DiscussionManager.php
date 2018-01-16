@@ -6,9 +6,11 @@
     use \Everyman\Neo4j\Traversal;
     use \Everyman\Neo4j\Relationship;
     use \Everyman\Neo4j\Cypher\Query;
-
+    use Illuminate\Routing\Route;
     use \Model\SkillManager;
     use App\Helpers\SecurityHelper as SH;
+    use Illuminate\Http\Request;
+
 
     class DiscussionManager extends BaseModel {
 
@@ -19,7 +21,7 @@
                             );
 
 
-        public function saveNewMessage($skillUuid, $topic = "", $message){
+        public function saveNewMessage($skillUuid, $topic = "", $message, Request $request){
             $cyp = "MATCH (user:User {uuid:{userUuid}}), (skill:Skill {uuid:{skillUuid}}) 
                     CREATE 
                     (user)
@@ -28,7 +30,7 @@
                     -[:IS_ABOUT]->(skill)
                     ";
             $query = new Query($this->client, $cyp, array(
-                "userUuid" => SH::getUser()->id,
+                "userUuid" => SH::getUser($request)->getId(),
                 "skillUuid" => $skillUuid,
                 "topic" => "",
                 // "topic" => SH::safe($topic),
@@ -61,7 +63,7 @@
                     $message['userProps'][$key] = $value;
                 }
 
-                $user = new SkillBaseManager();
+                $user = new User();
                 $user->setNode($row['user']);
                 $user->hydrateFromNode();
                 $message['postedBy'] = SH::encode($user->getUsername());
@@ -93,7 +95,7 @@
             $users = array();
             foreach($resultSet as $row) {
                 if ($returnUsers) {
-                    $user = new SkillBaseManager();
+                    $user = new Skill();
                     $user->setNode($row['user']);
                     $user->hydrateFromNode();
                     $users[] = $user;
@@ -141,11 +143,11 @@
                 $message['skillContext'] = $skillManager->getContext($row['skill']->getProperty('uuid'));
                 // $message['topic'] = SH::encode($row['message']->getProperty("topic"));
 
-                $user = new SkillBaseManager();
+                $user = new Skill();
                 $user->setNode($row['user']);
                 $user->hydrateFromNode();
                 
-                if ($user->active_flag) $message['userProfileURL'] = \Controller\Router::url('viewProfile', array('username' => $row['u']->getProperty('username')));
+                if ($user->active_flag) $message['userProfileURL'] = Route::url('viewProfile', array('username' => $row['u']->getProperty('username')));
                 else $message['userProfileURL'] = "";
 
                 $message['postedBy'] = SH::encode($user->username);

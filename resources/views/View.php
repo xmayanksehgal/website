@@ -14,7 +14,7 @@
         public function __construct($page, $data = array()){
             $this->page = $page;
             $this->data = $data;
-            $this->lang = $GLOBALS['lang']; //global
+            $this->lang = env('lang'); //global
         }
 
         public function setLayout($layout){

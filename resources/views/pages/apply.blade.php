@@ -21,29 +21,22 @@
 <hr />
 <section>
     <div class="container">
-        <?php if (Auth::user()): ?>
+        <?php if (Session::has('user')): ?>
             <?php
-                if (Auth::user()->role != "admin"){
-                    $user = Auth::user()->id;
-                    $status = \App\Model\EditorRequest::where('applied_by', '=', $user)->first();
-                    if (empty($status)):
-                        $value = 0;
-                    else:
-                        $value = $status->application_status;
-                    endif;
-                    switch ($value){
-                        case 0:?>
-                            @include("inc/apply_form")
-                            <?php
-                            break;
-                        case 1:
-                            echo '<p class="emphasis">' . _("Your application has been accepted!") . '</p>';
-                            break;
-                        case 2:
-                            echo '<p class="emphasis">' . _("Your application is beeing reviewed!") . '</p>';
-                    }
+            if (Session::get('user')['role'] != "admin"){
+                switch (\App\Helpers\SecurityHelper::getApplicationStatus()){
+                    case 0:?>
+                        @include('inc.apply_form');
+                        <?php
+                        break;
+                    case 1:
+                        echo '<p class="emphasis">' . _("Your application has been accepted!") . '</p>';
+                        break;
+                    case 2:
+                        echo '<p class="emphasis">' . _("Your application is beeing reviewed!") . '</p>';
                 }
-                else {
+            }
+            else {
                     echo '<p class="emphasis">' . _("Your are an Editor!") . '</p>';
                 }
             ?>

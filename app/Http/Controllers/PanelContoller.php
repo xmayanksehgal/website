@@ -11,10 +11,10 @@ use App\Model\DiscussionManager;
 
 class PanelContoller extends Controller
 {
-    public function getPanelAction($uuid){
+    public function getPanelAction($uuid,Request $request){
 
         $params = array();
-        $user = SH::getUser();
+        $user = SH::getUser($request);
 
         //retrieve the selected skill
         $skillManager = new SkillManager();

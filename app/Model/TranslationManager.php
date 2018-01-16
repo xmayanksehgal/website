@@ -2,19 +2,23 @@
 
     namespace App\Model;
 
+    use App\Helpers\SecurityHelper;
     use \Everyman\Neo4j\Node;
     use \Everyman\Neo4j\Traversal;
     use \Everyman\Neo4j\Relationship;
     use \Everyman\Neo4j\Cypher\Query;
     use Illuminate\Support\Facades\Auth;
+    use Illuminate\Http\Request;
+
 
     class TranslationManager extends BaseModel {
 
         /**
          * Insert or update
          */ 
-        public function saveSkillTranslation($languageCode, $name, Skill $skill, $auto = false){
-            $user = Auth::user();
+        public function saveSkillTranslation($languageCode, $name, Skill $skill, $auto = false,Request $request){
+//            $user = Auth::user();
+            $user = SecurityHelper::getUser($request);
 
 
             $cypher = "MATCH (s:Skill {uuid: {skillUuid}}), (u:User {uuid: {userUuid}})
@@ -92,7 +96,7 @@
             $params = array(
                 "q"         => $this->convertCaseForGoogleTranslate($string),
                 "format"    => "text",
-                "key"       => \Config\Config::GOOGLE_TRANSLATE_API_KEY,
+                "key"       => env('GOOGLE_TRANSLATE_API_KEY'),
                 "source"    => $fromLang,
                 "target"    => $toLang
             );

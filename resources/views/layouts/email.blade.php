@@ -25,6 +25,7 @@
                 <tr>
                     <td width="40" style="width: 40px;"></td>
                     <td width="520" style="width: 520px; font-family: Tahoma, Verdana, Arial; text-align: justify; font-size: 13px;">
+                        @include('mails.'.$contentFile)
                         <?php include ("../View/mails/".$contentFile); ?>
                         <br /><br />
                         See you soon on <a style="color: #14AFB7;" href="<?= $GLOBALS['base_url']; ?>">Skill Project</a>,<br />

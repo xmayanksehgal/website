@@ -4,19 +4,24 @@
 
     use App\Model\SkillManager;
     use App\Model\TranslationManager;
-//    use App\Model\DiscussionManager;
+    use App\Model\DiscussionManager;
 //    use App\Model\UserManager;
     use App\Model\NotificationManager;
     use App\Model\Skill;
     use App\Model\User;
     use App\Helpers\SecurityHelper as SH;
+    use App\Model\UserManager;
+    use Illuminate\Http\Request;
+    use \l10n\JSTranslations;
     use Psy\Util\Json;
     use \View\AjaxView;
-
+    use App\Model\DatabaseFactory;
     use \Everyman\Neo4j\Cypher\Query;
     use \Everyman\Neo4j\Relationship;
     use \Everyman\Neo4j\Traversal;
     use App\Model\JsonResponse;
+    use App\Model\CustomValidator;
+    use App\Model\LanguageCode;
 
 
     class ApiController extends Controller {
@@ -128,8 +133,7 @@
          * @todo handle response correctly
          * @param string $uuid
          */
-        function deleteSkillAction(){
-
+        public function deleteSkillAction(Request $request){
             SH::checkUsage(5);
             //lock is down there
 
@@ -139,15 +143,15 @@
 
                 $skillUuid = $_POST['skillUuid'];
 
-                SH::lock("creator", $skillUuid, "delete");
+                SH::lock("creator", $skillUuid, "delete", $request);
 
-                $validator = new \Model\Validator();
+                $validator = new CustomValidator();
                 $validator->validateSkillUuid($skillUuid);
 
                 if ($validator->isValid()){
                     $skillManager = new SkillManager();
                     $skill = $skillManager->findByUuid($skillUuid);
-                    $deletionResult = $skillManager->delete($skillUuid, SH::getUser()->getUuid());
+                    $deletionResult = $skillManager->deleteSkill($skillUuid, SH::getUser($request)->getUuid());
                 }
             }
 
@@ -171,11 +175,11 @@
         /**
          * Add a comment on a skill
          */
-        public function discussSkillAction(){
+        public function discussSkillAction(Request $request){
 
             //lock 
             SH::checkUsage(60);
-            SH::lock();
+            SH::lock($request);
 
             if (!empty($_POST)){
                 $skillUuid = $_POST['skillUuid'];
@@ -186,7 +190,7 @@
                 $message = $_POST['message'];
                 // $topic = $_POST['topic'];
 
-                $validator = new \Model\Validator();
+                $validator = new CustomValidator();
                 $validator->validateSkillUuid($skillUuid);
                 $validator->validateMessage($message);
                 // $validator->validateMessageTopic($topic);
@@ -231,7 +235,7 @@
         /**
          * Move or duplicate a skill
          */
-        public function moveSkillAction(){
+        public function moveSkillAction(Request $request){
             
             SH::checkUsage(10);
             //lock is down there
@@ -239,7 +243,7 @@
             if (!empty($_POST)){
                 $skillUuid = $_POST['selectedSkillUuid'];
 
-                SH::lock("creator", $skillUuid, "move");
+                SH::lock("creator", $skillUuid, "move", $request);
 
                 $skillManager = new SkillManager();
                 $newParentUuid = $_POST['destinationUuid'];
@@ -248,9 +252,9 @@
                 $newParent = $skillManager->findByUuid($newParentUuid);
                 
                 //retrieve current user uuid
-                $userUuid = SH::getUser()->getUuid();
+                $userUuid = SH::getUser($request)->getUuid();
 
-                $validator = new \Model\Validator();
+                $validator = new CustomValidator();
                 $validator->validateSkillUuid($skillUuid);
                 $validator->validateSkillUuid($newParentUuid);
                 $validator->validateUniqueChild($newParentUuid, $skill->getName());
@@ -313,7 +317,7 @@
         /**
          * Translate a skill
          */
-        public function translateSkillAction(){
+        public function translateSkillAction(Request $request){
 
             SH::checkUsage(50);
             //lock is down there
@@ -324,9 +328,9 @@
                 $languageCode = $_POST['language'];
                 $skillUuid = $_POST['skillUuid'];
 
-                SH::lock("creator", $skillUuid, "translate");
+                SH::lock("creator", $skillUuid, "translate",$request);
 
-                $validator = new \Model\Validator();
+                $validator = new CustomValidator();
                 $validator->validateSkillName($skillTrans);
                 $validator->validateLanguageCode($languageCode);
                 $validator->validateSkillUuid($skillUuid);
@@ -337,10 +341,10 @@
                     $skill = $skillManager->findByUuid($skillUuid);
 
                     //if the translation is being made for english, rename the skill instead
-                    if ($languageCode == \Config\Config::DEFAULT_LOCALE){
+                    if ($languageCode == 'en'){
                         $previousName = $skill->getName();
                         $skill->setName($skillTrans);
-                        $skillManager->updateSkill($skill, SH::getUser()->getUuid(), $previousName);
+                        $skillManager->updateSkill($skill, SH::getUser($request)->getUuid(), $previousName);
                         $this->warn("translated english version", $skill, array(
                             "translated in" => $languageCode,
                             "renamed to" => $skillTrans
@@ -380,7 +384,7 @@
         /**
          * Rename a skill
          */
-        public function renameSkillAction(){
+        public function renameSkillAction(Request $request){
 
             SH::checkUsage(10);
             //lock is down there
@@ -390,7 +394,7 @@
                 $skillName = $_POST['skillName'];
                 $skillUuid = $_POST['skillUuid'];
                 
-                SH::lock("creator", $skillUuid, "rename");
+                SH::lock("creator", $skillUuid, "rename", $request);
 
                 $skillManager = new SkillManager();
                 $skill = $skillManager->findByUuid($skillUuid);
@@ -398,7 +402,7 @@
 
                 $parentSkill = $skillManager->findParent($skill);
 
-                $validator = new \Model\Validator();
+                $validator = new CustomValidator();
                 $validator->validateSkillName($skillName);
                 $validator->validateSkillUuid($skillUuid);
                 $validator->validateUniqueChild($parentSkill->getUuid(), $skillName);
@@ -406,17 +410,17 @@
                 if ($validator->isValid()){
 
                     $previousName = $skill->getName();
-                    $user = SH::getUser();
+                    $user = SH::getUser($request);
 
                     //if the skill in not being renamed in english: 
-                    if ($GLOBALS['lang'] != \Config\Config::DEFAULT_LOCALE){
+                    if (env('lang') != env('lang')){
                         $translationManager = new TranslationManager();
 
                         //insert or update, the same
-                        $translationManager->saveSkillTranslation($GLOBALS['lang'], $skillName, $skill, false);
+                        $translationManager->saveSkillTranslation(env('lang'), $skillName, $skill, false);
 
                         $this->warn("translated by rename", $skill, array(
-                            "translated in" => $GLOBALS['lang'],
+                            "translated in" => env('lang'),
                             "translation" => $skillName
                         ));
                     }
@@ -496,13 +500,17 @@
         /**
          * Add a new skill
          */
-        public function addSkillAction(){
+        public function addSkillAction(Request $request){
+
+//            var_dump("here");
+//            die;
+//
 
             SH::checkUsage(20);
-            SH::lock();
+            SH::lock("",null,"",$request);
 
             if (!empty($_POST)){
-                
+
                 //post data
                 $selectedSkillUuid = $_POST['selectedSkillUuid'];
                 $skillName = $_POST['skillName'];
@@ -512,7 +520,7 @@
                 //check rights here for create_as_parent
                 //creating as parent...
                 if ($selectedSkillUuid != $skillParentUuid){
-                    $rights = SH::getRights(SH::getUser(), $selectedSkillUuid);
+                    $rights = SH::getRights(SH::getUser($request), $selectedSkillUuid);
                     if (!in_array("create_as_parent", $rights)){
                         SH::forbid();
                     }
@@ -523,7 +531,7 @@
                 $parentSkill = $skillManager->findByUuid( $skillParentUuid );
 
                 //validation
-                $validator = new \Model\Validator();
+                $validator = new CustomValidator();
                 $validator->validateSkillName($skillName);
                 $validator->validateSkillUuid($selectedSkillUuid);
                 $validator->validateSkillParentUuid($skillParentUuid);
@@ -537,28 +545,27 @@
                     //WARNING !!!
                     //Request new client to avoid strangest bug on earth
                     //--------------------------------------------------
-                    \Model\DatabaseFactory::setNewClient();
+                    DatabaseFactory::setNewClient();
+
 
                     $validator->validateNumChild($parentSkill);
                 }
                 
                 if ($validator->isValid() && $parentSkill){
-
                     //retrieve current user uuid
-                    $userUuid = SH::getUser()->getUuid();
+                    $userUuid = SH::getUser($request)->getUuid();
                     
                     //get all Languages (for the translation <select>)
-                    $lc = new \Model\LanguageCode();
+                    $lc = new LanguageCode();
                     $languages = $lc->getAllCodes("short");
 
-                    $translationManager = new \Model\TranslationManager();
+                    $translationManager = new TranslationManager();
                     
                     //if the skill in not being created in english: 
-                    if ($GLOBALS['lang'] != \Config\Config::DEFAULT_LOCALE){
+                    if (env('lang') != 'en'){
                         //get the english version
                         $localeSkillName = $skillName;
-                        $skillName = $translationManager->googleTranslate($localeSkillName, \Config\Config::DEFAULT_LOCALE, $GLOBALS['lang']);
-
+                        $skillName = $translationManager->googleTranslate($localeSkillName, 'en', env('lang'));
                     }
 
                     //create the skill object in default lang
@@ -577,27 +584,26 @@
                     //then auto translate
                     foreach($languages as $code){
                         //english is done already
-                        if ($code == \Config\Config::DEFAULT_LOCALE || $code == "xl"){ continue; }
+                        if ($code == env('lang') || $code == "xl"){ continue; }
 
                         //this is the current language, and the skill was not added in english
-                        if ($code == $GLOBALS['lang'] && isset($localeSkillName)){
+                        if ($code == env('lang') && isset($localeSkillName)){
                             //use user's name
                             $transSkillName = $localeSkillName;
                         }
                         //we are in english, translate from the user name, from english to code
-                        elseif ($GLOBALS['lang'] == \Config\Config::DEFAULT_LOCALE) {
-                            $transSkillName = $translationManager->googleTranslate($skillName, $code, $GLOBALS['lang']);
+                        elseif (env('lang') == env('lang')) {
+                            $transSkillName = $translationManager->googleTranslate($skillName, $code, env('lang'));
                         }
                         //we are not in english, translate from the user name, from his lang to code
                         elseif (isset($localeSkillName)) {
-                            $transSkillName = $translationManager->googleTranslate($localeSkillName, $code, $GLOBALS['lang']);
+                            $transSkillName = $translationManager->googleTranslate($localeSkillName, $code, env('lang'));
                         }
 
                         if ($transSkillName){
                             $translations[$code] = $transSkillName;
-                            $translationManager->saveSkillTranslation($code, $transSkillName, $skill, true);
+                            $translationManager->saveSkillTranslation($code, $transSkillName, $skill, true, $request);
                         }
-                      
                     }
 
                     $notificationManager = new NotificationManager();
@@ -633,11 +639,10 @@
                         "uuid" => $skill->getUuid()
                     ));
 
-                    $this->warn("created and autotranslated", $skill, $infos);  
-                    
+                    $this->warn("created and autotranslated", $skill, $infos);
                     $skill = $skillManager->findByUuid($skill->getUuid());
 
-                    $json = new \Model\JsonResponse("ok", _("Skill saved!"));
+                    $json = new JsonResponse("ok", _("Skill saved!"));
                     $data = array();
                     $data['skill'] = $skill->getJsonData();
                     $data['parent'] = $parentSkill->getJsonData();
@@ -659,12 +664,40 @@
          * get JSON with JS translations
          */
         public function getJSTranslationsAction() {
-            $jsTrans = new \l10n\JSTranslations;
+//            $jsTrans = new JSTranslations();
             header("Content-type: application/javascript");
-            echo "var jt = " . json_encode($jsTrans->getJSTranslations(), JSON_PRETTY_PRINT);
+            $jt_arr = array(
+//                "currentLang"   => $GLOBALS["lang"],
+                "currentLang"   => env('lang'),
+                "or"    => _("or"),
+
+                "error" => _("An error occurred"),
+                "ok"    => _("Ok"),
+
+                "panel" => array(
+                    "haveToBeSigned"    => _("You have to be signed in to do that!"),
+                    "signIn"            => _("Sign in"),
+                    "createAccount"     => _("Create an account"),
+                    "capIdealMax"       => _("The new skill has been created but for the tree of skills to remain simple, only <strong>%%%IDEAL%%%&nbsp;skills</strong> should be added to <strong>\"%%%PARENTNAME%%%\"</strong>. Please start thinking of a way to group the skills."),
+                    "capAlert"          => _("It's getting crowded here! Only <strong>%%%IDEAL%%%&nbsp;skills</strong> should be added to <strong>\"%%%PARENTNAME%%%\"</strong>. Please start thinking of a way to group the skills. You will not be able to add more than <strong>%%%NOMORE%%%&nbsp;skills</strong>."),
+                    "capNoMore"         => _("Oh dear! This is the last skill you can add to <strong>\"%%%PARENTNAME%%%\"</strong>. You have reached the hard limit of <strong>%%%NOMORE%%%&nbsp;skills</strong> (ideal maximum:&nbsp;<strong>%%%IDEAL%%%</strong>). Please think of a way to group the skills."),
+
+                    "capsDiscuss"       => _("If you think this limit is too low, please explain why in the \"Discuss\" panel and an Editor will raise it if appropriate."),
+                ),
+
+                "footer" => array(
+                    "searchPlaceholder" => _("SEARCH A SKILL (%s)")
+                )
+            );
+            echo "var jt = " . json_encode($jt_arr, JSON_PRETTY_PRINT);
         }
 
-
+        /**
+         * @todo: MAILER CONFIGURATIONS
+         * @param $type
+         * @param Skill $skill
+         * @param array $data
+         */
         public function warn($type, Skill $skill, array $data = array()){
             
             $params = array(
@@ -673,8 +706,8 @@
                 "data" => $data
             );
 
-            $mailer = new Mailer();
-            $mailer->sendWarning($params);
+//            $mailer = new Mailer();
+//            $mailer->sendWarning($params);
 
 
         }
@@ -689,7 +722,7 @@
             $usersInDiscussion = $discussionMananager->getUsersInDiscussion($skillUuid);
 
             $userManager = new UserManager();
-            $currentUser = $userManager->findByUuid($_SESSION["user"]["uuid"]);
+            $currentUser = $userManager->findByUuid(Session::get('user')['uuid']);
 
             $discussionData = array(
                 "message"       => $postedMessage,
@@ -732,7 +765,7 @@
          * Edit skill children caps
          * !! If we add more settings, watch out below for the updateCaps() call
          */
-        public function skillSettingsAction(){
+        public function skillSettingsAction(Request $request){
 
             SH::lock("admin");
             SH::checkUsage(40);
@@ -756,13 +789,11 @@
                 $skill->setCapAlert($capAlert);
                 $skill->setCapNoMore($capNoMore);
 
-                $validator = new \Model\Validator();
+                $validator = new CustomValidator();
                 $validator->validateCaps($skill);
-
                 if ($validator->isValid()){
 
-                    $user = SH::getUser();
-
+                    $user = SH::getUser($request);
                     //watch out, update caps only
                     $skillManager->updateCaps($skill, $user->getUuid());
 
@@ -800,7 +831,7 @@
                 }
 
                 $history = $skillManager->getSkillHistory($skillUuid);
-                return view('panel.skill-history-content', ['history'=>$history]);
+                return view('panels.skill-history-content', ['history'=>$history]);
 //                $view = new AjaxView("panels/skill-history-content.blade.php", array(
 //                        "history"  => $history
 //                    ));
@@ -812,11 +843,11 @@
         /**
          * Retrieve user notifications
          */
-        public function userNotificationsAction(){
+        public function userNotificationsAction(Request $request){
 
             SH::lock("admin");
-            
-            $user = SH::getUser();
+
+            $user = SH::getUser($request);
             $notificationManager = new NotificationManager();
             $notifications = $notificationManager->getAllUserNotifications($user->getUuid());
 
@@ -831,6 +862,63 @@
                 echo "notif uuid: " . $notif['notif']->getUuid() . "<br />";
                 echo $notif['notif']->getTimestamp() . "<br /><br />";
             }
+        }
+
+        /**
+         * The contact page
+         */
+        public function contactAction(Request $request){
+
+            $params = array(
+                "title" => _("Contact us"),
+                "email" => "",
+                "realName" => "",
+                "message" => ""
+            );
+
+            $params['contact_message_sent'] = false;
+            if (!empty($_SESSION['contact_message_sent'])){
+                unset($_SESSION['contact_message_sent']);
+                $params['contact_message_sent'] = true;
+            }
+
+            //to prefill the form
+            if ($user = SH::getUser($request)){
+                $params['email'] = $user->getEmail();
+            }
+
+            if (!empty($_POST)){
+                $params['email'] = SH::safe($_POST['email']);
+                $params['realName'] = SH::safe($_POST['real_name']);
+                $params['message'] = SH::safe($_POST['message']);
+
+                $validator = new CustomValidator();
+                $validator->validateMessage($params['message']);
+                $validator->validateEmail($params['email']);
+
+                if ($validator->isValid()){
+                    //send mail to us
+
+                    $mailer = new Mailer();
+                    if ($mailer->sendContactMessage($params)){
+//                        $_SESSION['contact_message_sent'] = true;
+//                        $mailer->sendContactMessageConfirmation($params);
+//                        Router::reload();
+                        return redirect()->to('/contact');
+
+                    }
+                    else {
+                        $validator->addError("global", _("A problem occurred while sending your message. Please try again!"));
+                    }
+                }
+
+                if ($validator->hasErrors()){
+                    $params["errors"] = $validator->getErrors();
+                }
+            }
+            return view('pages.contact',['params'=>$params]);
+//            $view = new View("contact.php", $params);
+//            $view->send();
         }
 
     }

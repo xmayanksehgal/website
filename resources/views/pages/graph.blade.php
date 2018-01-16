@@ -38,7 +38,7 @@
 <div id="footer">
 	<div id="loader"></div>
 	<div id="debug">
-		
+
 	</div>
 	<div id="footer-container" class="container">
         <form id="search-form" method="GET" action="/api/skillSearch/">

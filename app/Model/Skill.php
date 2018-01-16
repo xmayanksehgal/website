@@ -172,10 +172,10 @@
          */
         public function getLocalName(){
             $name = $this->getName();
-////            if ($GLOBALS['lang'] != \Config\Config::DEFAULT_LOCALE){
-//            if ($GLOBALS['lang'] != 'en'){
-//                if ($this->getTranslation($GLOBALS['lang'])){
-//                    $name = $this->getTranslation($GLOBALS['lang']);
+////            if (env('lang') != \Config\Config::DEFAULT_LOCALE){
+//            if (env('lang') != 'en'){
+//                if ($this->getTranslation(env('lang'))){
+//                    $name = $this->getTranslation(env('lang'));
 //                }
 //            }
             return $name;
@@ -296,7 +296,7 @@
          */
         public function getOwner(){
             $skillManager = new skillManager();
-            $owner = $skillManager->getSkillOwner($this->getUuid());
+            $owner = $skillManager->getSkillOwner($this->id);
 
             return $owner;
         }

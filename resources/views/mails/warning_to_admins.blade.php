@@ -9,7 +9,7 @@
     $skillUrl = \Controller\Router::url('goTo', array("slug" => $skill->getSlug()), true);
     echo '<br /><b>link:</b> <a style="color: #14AFB7;" href="'.$skillUrl.'">'.$skillUrl.'</a>';
 
-    if ($user = \Utils\SecurityHelper::getUser()){
+    if ($user = \Utils\SecurityHelper::getUser($request)){
         echo "<br /><br /><b>User:</b> " . $user->getUsername();
     }
 

@@ -1,14 +1,15 @@
 <div id="translate-skill-panel" class="panel-content">
 
-    <?php include("subpanel-top.blade.php") ?>
+    @include("panels/subpanel-top")
 
     <h3><?= _("TRANSLATE"); ?></h3>
-    <form method="POST" action="<?= \Controller\Router::url("translateSkill"); ?>" id="translate-skill-form">
-        <input type="hidden" name="skillUuid" id="translate-skillUuid" value="<?= $skill->getUuid(); ?>" />
+    <form method="POST" action="{{ route('skillTranslations') }}" id="translate-skill-form">
+        {{ csrf_field() }}
+        <input type="hidden" name="skillUuid" id="translate-skillUuid" value="<?= $param['skill']->getUuid(); ?>" />
         <div>
             <select name="language" id="language-select" required>
                 <option value=""><?= _("SELECT YOUR LANGUAGE"); ?></option>
-                <?php foreach($languages as $code => $names): ?>
+                <?php foreach($param['languages'] as $code => $names): ?>
                 <option value="<?= $code; ?>"><?= $names['nativeName']; ?></option>
                 <?php endforeach; ?>
             </select>
@@ -29,5 +30,5 @@
         <?php include("skill-translations.blade.php"); ?>
     </ul>
 
-    <?php include("panel-bottom.blade.php"); ?>
+    @include("panels.panel-bottom")
 </div>

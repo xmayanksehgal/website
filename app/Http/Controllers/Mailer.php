@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Model\User;
+
 
 class Mailer
 {
@@ -59,7 +61,9 @@ class Mailer
     private function getContent($contentFile, array $params){
         ob_start();
         extract($params);
-        include("../View/layouts/email.php");
+        include view('layouts.email');
+        include view();
+//        include("../View/layouts/email.php");
         //include '../View/mails/' . $contentFile;
         $content = ob_get_clean();
         return $content;
@@ -328,7 +332,7 @@ class Mailer
     }
 
     private function handleError($e){
-        if (\Config\Config::DEBUG){
+        if (env('DEBUG')){
             echo 'A mandrill error occurred: ' . get_class($e) . ' - ' . $e->getMessage();
             throw $e;
         }

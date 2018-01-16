@@ -39,7 +39,7 @@
 if (in_array("create_as_child", $param['rights']) || in_array("create_as_parent", $param['rights'])){ ?> @include("panels.create-skill-panel") <?php }
 if (in_array("rename", $param['rights'])){ ?> @include("panels.rename-skill-panel") <?php }
 if (in_array("settings", $param['rights'])){ ?> @include("panels.skill-settings-panel") <?php }
-if (in_array("translate", $param['rights'])){ ?> @include("panels.translate-skill-panel") <?php }
+//if (in_array("translate", $param['rights'])){include("panels.translate-skill-panel");}
 if (in_array("move", $param['rights'])){ ?> @include("panels.move-skill-panel") <?php }
 if (in_array("delete", $param['rights'])){ ?> @include("panels.delete-skill-panel") <?php }
 if (in_array("discuss", $param['rights'])){ ?> @include("panels.discuss-skill-panel") <?php }

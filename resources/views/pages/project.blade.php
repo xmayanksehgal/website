@@ -14,8 +14,8 @@
         <p>In our simple structure, <b>each skill can be split into more specific sub-skills</b>. All you have to do is add your own skills in the most appropriate section.</p>
         <p><a href="/project" alt="<?= _("The skills"); ?>">You can browse the skill database</a> right now. You don't need an account to do it.</p>
         <p>If you want to add your skills, you can <a class="register-link" href="/register" title="<?= _("Register!"); ?>">sign up</a> in a matter of seconds. Add new skills and share your thoughts about existing ones.</p>
-        <p>If you want to edit skills added by other users, you need to <a href="" title="<?= _("Become an Editor!"); ?>">apply to become an Editor</a>. Editor applications are reviewed daily so you can quickly become a full-fledged member of our growing community.</p>
-        <p>If you want to meet the team and the first members of Skill Project, head straight for our <a href="" title="<?= _("Skill Project's Community"); ?>">community forum</a> and introduce yourself!</p>
+        <p>If you want to edit skills added by other users, you need to <a href="/apply" title="<?= _("Become an Editor!"); ?>">apply to become an Editor</a>. Editor applications are reviewed daily so you can quickly become a full-fledged member of our growing community.</p>
+        <p>If you want to meet the team and the first members of Skill Project, head straight for our <a href="https://t.me/skill_project" title="<?= _("Skill Project's Community"); ?>">community forum</a> and introduce yourself!</p>
     </div>
 </section>
 <hr />
@@ -79,7 +79,7 @@
         <div class="faq-q">
             <h4>How do I add a skill?</h4>
             <div class="faq-a">
-                <p>First, you must <a class="login-link" href="" title="<?= _("Sign in!"); ?>">be logged in</a>. If you don’t yet have an account, head over to the <a class="register-link" href="/register" title="<?= _("Register!"); ?>">Sign up form</a>.<br />
+                <p>First, you must <a class="login-link" href="/login" title="<?= _("Sign in!"); ?>">be logged in</a>. If you don’t yet have an account, head over to the <a class="register-link" href="/register" title="<?= _("Register!"); ?>">Sign up form</a>.<br />
                     Then, click on the “+” button on a skill that's related to the skill you want to add. This will open a panel with the “Create Skill” option.</p>
             </div>
         </div>
@@ -88,7 +88,7 @@
             <div class="faq-a">
                 <p>If we didn’t, some skills would have hundreds or even thousands of sub-skills (think about the spoken languages for example). That wouldn’t make a very nice tree. Nor would it be easy to explore.<br />
                     On the other hand, we noticed that it’s always possible to group skills together in such a way that the total number of skills in each group is always relatively small. This becomes obvious for skills you master because you can usually see that they naturally belong to different groups.<br />
-                    At the moment, we are limiting to 10 sub-skills, but we might slightly raise this limit in the future if it’s a problem. Do raise the issue on the <a href="" title="<?= _("Skill Project's Community"); ?>">community forum</a> if it’s bothering you.</p>
+                    At the moment, we are limiting to 10 sub-skills, but we might slightly raise this limit in the future if it’s a problem. Do raise the issue on the <a href="https://t.me/skill_project" title="<?= _("Skill Project's Community"); ?>">community forum</a> if it’s bothering you.</p>
             </div>
         </div>
         <div class="faq-q">
@@ -108,7 +108,7 @@
             <h4>Why doesn’t everyone have Editor rights? Like on Wikipedia?</h4>
             <div class="faq-a">
                 <p>Unfortunately, sometimes we have to plan for the worst. Wreaking havoc on the tree is just a few clicks away, when you have Editor rights. Because our data has an intrinsic hierarchical form, it is very easy to vandalize a few skills (on the top levels) for a very visible effect.<br />
-                    But we are constantly thinking about new and creative ways to moderate the system. If you have any ideas, we’ll be glad to hear from you on the <a href="" title="<?= _("Skill Project's Community"); ?>">community forum</a>.</p>
+                    But we are constantly thinking about new and creative ways to moderate the system. If you have any ideas, we’ll be glad to hear from you on the <a href="https://t.me/skill_project" title="<?= _("Skill Project's Community"); ?>">community forum</a>.</p>
             </div>
         </div>
         <div class="faq-q">
@@ -140,7 +140,7 @@
         <div class="faq-q">
             <h4>Do you have a REST API?</h4>
             <div class="faq-a">
-                <p>It's on our roadmap but we don’t consider it a priority. If it’s important to you, raise the issue on the <a href="" title="<?= _("Skill Project's Community"); ?>">community forum</a> so we can discuss it together and see if it would come handy to more people. We will then reconsider our priorities.</p>
+                <p>It's on our roadmap but we don’t consider it a priority. If it’s important to you, raise the issue on the <a href="https://t.me/skill_project" title="<?= _("Skill Project's Community"); ?>">community forum</a> so we can discuss it together and see if it would come handy to more people. We will then reconsider our priorities.</p>
             </div>
         </div>
 
@@ -197,7 +197,7 @@
         <div class="faq-q">
             <h4>How hard is it to become an Editor?</h4>
             <div class="faq-a">
-                <p>It’s not hard, you just need to take a few minutes to fill in the <a href="" title="<?= _("Become an Editor!"); ?>">application form</a>. But we take care to only give Editor rights to people who take their application seriously. We don’t have an upper limit on the number of Editors the Skill Project can have, but we will encourage Editorship for branches of the tree that are not yet catered for.</p>
+                <p>It’s not hard, you just need to take a few minutes to fill in the <a href="/apply" title="<?= _("Become an Editor!"); ?>">application form</a>. But we take care to only give Editor rights to people who take their application seriously. We don’t have an upper limit on the number of Editors the Skill Project can have, but we will encourage Editorship for branches of the tree that are not yet catered for.</p>
             </div>
         </div>
         <div class="faq-q">
@@ -221,7 +221,7 @@
 <section>
     <div class="container">
         <h2><?= _("MEET THE TEAM"); ?></h2>
-        <p>Skill Project is brought to you by 3 friends living in Paris, France. We share a passion for learning, teaching and experimenting which has naturally led us to come up with Skill Project. Apart from that, we come from very different cultural and gastronomical backgrounds! Come and chat with us in the <a href="" title="<?= _("Skill Project's Community"); ?>">community section</a>.
+        <p>Skill Project is brought to you by 3 friends living in Paris, France. We share a passion for learning, teaching and experimenting which has naturally led us to come up with Skill Project. Apart from that, we come from very different cultural and gastronomical backgrounds! Come and chat with us in the <a href="https://t.me/skill_project" title="<?= _("Skill Project's Community"); ?>">community section</a>.
         </p>
         <div class="project-col">
             <div id="dario-pic" class="team-pic"></div>

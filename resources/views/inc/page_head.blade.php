@@ -42,6 +42,12 @@
     ga('send', 'pageview');
 </script>
 
+<script>
+    function loadJSTranslations() {
+        $.get("/js-translations");
+    }
+</script>
+
 <link href="{{ asset('css/all.css') }}" rel="stylesheet">
 <script src="{{ asset('js/jquery-2.1.1.min.js')}}"></script>
 <script src="{{ asset('js/jquery-ui.min.js') }}"></script>

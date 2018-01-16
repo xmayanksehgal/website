@@ -7,7 +7,7 @@ use Controller\Router;
 use Illuminate\Database\Eloquent\Model;
 
 
-class DatabaseFactory extends Model
+class DatabaseFactory
 {
     //
 

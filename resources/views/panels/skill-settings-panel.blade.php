@@ -1,9 +1,10 @@
 <div id="skill-settings-panel" class="panel-content">
 
-    <?php include("subpanel-top.blade.php") ?>
+    @include("panels/subpanel-top")
 
     <h3><?= _("Skill settings"); ?></h3>
-    <form method="POST" action="<?= \Controller\Router::url("skillSettings"); ?>" id="skill-settings-form">
+    <form method="POST" action="{{ route('skillSettings') }}" id="skill-settings-form">
+        {{ csrf_field() }}
         <input type="hidden" name="skillUuid" id="skillUuid" value="<?= $param['skill']->getUuid(); ?>" />
         <div>
             <h4><?= _("Sub-skill caps"); ?></h4>
@@ -27,6 +28,6 @@
         </div>
         <div class="clearfix"></div>
     </form>
-        
-    <?php include("panel-bottom.blade.php"); ?>
+
+    @include("panels.panel-bottom")
 </div>

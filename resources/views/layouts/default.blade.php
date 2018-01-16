@@ -2,12 +2,14 @@
 <?php $page = Route::getFacadeRoot()->current()->uri();
 if ($page == '/')
     $page = 'home';
+else if ($page == 'profile/{username}')
+    $page = 'profile';
 ?>
 <html class="page <?= $page?>">
 <head>
 @include('inc/page_head')
 </head>
-<body class="page">
+<body class="page" onload="loadJSTranslations()">
 <div id="wrapper">
     <header id="header">
         <div id="header-container">
@@ -20,21 +22,21 @@ if ($page == '/')
 </div>
 <div id="page-footer">
     <div id="footer-container" class="container">
-        <a id="footer-logo" href="<?= "/" ?>" title="Skill Project | Home"><img src="img/logo-small.png" /></a>
-        <span class="copyright">Copyright &copy;2014</span>
+        <a id="footer-logo" href="<?= "/" ?>" title="Skill Project | Home"><img src="img/skill-project.png" /></a>
+        <span class="copyright">Copyright &copy;<?php echo date('Y'); ?></span>
         <nav id="footer-nav">
             <ul>
-                <li><a href="" title=""><?= _("The Skills"); ?></a></li>
-                <li><a title="" href="/project"><?= _("The project"); ?></a></li>
+                <li><a href="/skills" title="The Skills"><?= _("The Skills"); ?></a></li>
+                <li><a title="The Project" href="/project"><?= _("The project"); ?></a></li>
                 <?php
-                        if(Auth::user())
+                        if(Session::has('user'))
                             {?>
-                                <li><a href="/profile" title="<?= _("Register!"); ?>"><?= _("Profile"); ?></a></li>
+                                <li><a href="/profile/<?=Session::get('user')['username']?>" title="<?= _("Profile"); ?>"><?= _("Profile"); ?></a></li>
                             <?php
                             }
                 ?>
                 <li><a href="/apply" title="<?= _("Become part of the project!"); ?>"><?= _("Apply"); ?></a></li>
-                <li><a href="http://vanilla.skill-project.org/" title="The Skill Project Community"><?= _("Community"); ?></a></li>
+                <li><a href="https://t.me/skill_project" title="The Skill Project Community"><?= _("Community"); ?></a></li>
                 <li><a href="/contact" title="<?= _("Contact us"); ?>"><?= _("Contact"); ?></a></li>
                 <li class="last"><a href="/legal" title=""><?= _("Terms of Use"); ?></a></li>
             </ul>

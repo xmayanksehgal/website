@@ -12,12 +12,12 @@ use Carbon\Carbon;
 use App\Model\Skill;
 
 
-class SkillManager extends Model
+class SkillManager
 {
     private $searchIndex;
 
     public function __construct(){
-        parent::__construct();
+//        parent::__construct();
         $this->client = DatabaseFactory::getClient();
         //$this->createSearchIndex();
     }
@@ -179,9 +179,7 @@ class SkillManager extends Model
         $skillLabel = $findDeleted ? "DeletedSkill" : "Skill";
 
         $cyp = "MATCH (skill:$skillLabel { uuid: {uuid} }) RETURN skill LIMIT 1";
-        $query = new Query($this->client, $cyp, array(
-                "uuid"          => $uuid)
-        );
+        $query = new Query($this->client, $cyp, array("uuid"=> $uuid));
         $resultSet = $query->getResultSet();
         if ($resultSet->count() == 1){
             $skill = new Skill();
@@ -189,7 +187,6 @@ class SkillManager extends Model
             $skill->hydrateFromNode();
             return $skill;
         }
-
         return false;
     }
 
@@ -353,8 +350,8 @@ class SkillManager extends Model
 
         $local_string = "s.name";
         //if we are not browsing in english, search in current lang
-        if ($GLOBALS['lang'] != \Config\Config::DEFAULT_LOCALE){
-            $local_string = "s.l_".$GLOBALS['lang'];
+        if (env('lang') != 'en'){
+            $local_string = "s.l_".env('lang');
         }
 
         $cyp = "MATCH (gp:Skill)-[:HAS*0..1]->(p:Skill)-[:HAS]->(s:Skill)
@@ -416,7 +413,7 @@ class SkillManager extends Model
                 //WARNING !!!
                 //Request new client to avoid strangest bug on earth
                 //--------------------------------------------------
-                \Model\DatabaseFactory::setNewClient();
+                DatabaseFactory::setNewClient();
 
                 $parentSkill = new Skill($row["p"]);
                 $parent = $parentSkill->getLocalName();
@@ -436,8 +433,6 @@ class SkillManager extends Model
      * @return bool Return true on success
      */
     public function saveSkill(Skill $skill, $skillParentUuid, $userUuid){
-
-
         //intentionally not saving caps, as they are not added at skill creation
         $cyp = "MATCH
                     (parent:Skill {uuid: {parentUuid}}),
@@ -485,7 +480,6 @@ class SkillManager extends Model
         $resultSet = $query->getResultSet();
 
         $this->updateChildrenCount($skillParentUuid);
-
         return true;
     }
 
@@ -571,6 +565,7 @@ class SkillManager extends Model
      * Creates a new Parent-child relations
      * @param Skill the parent
      * @param Skill the child
+     * @return bool
      */
     public function saveParentChildRelationship(Skill $parent, Skill $child){
         $rel = $this->client->makeRelationship();
@@ -653,42 +648,41 @@ class SkillManager extends Model
      * Delete a node by uuid, and its relations
      * @return mixed True on deletion, error message otherwise
      */
-//    public function delete($skillUuid, $userUuid){
-//
-//        $nodeExists = $this->findByUuid($skillUuid);
-//        if ($nodeExists){
-//            $childrenNumber = $this->countChildren($skillUuid);
-//            if($childrenNumber == 0){
-//
-//                //change the label from :Skill to :DeletedSkill
-//                $cyp = "MATCH (parent:Skill)-[:HAS]->(s:Skill {uuid:{skillUuid}}), (u:User {uuid:{userUuid}})
-//                            SET s.previousParentUuid = parent.uuid
-//                            SET s :DeletedSkill
-//                            REMOVE s:Skill
-//                            CREATE (u)-[r:DELETED {timestamp:{now}}]->(s)
-//                            RETURN parent";
-//                $query = new Query($this->client, $cyp, array(
-//                        "skillUuid" => $skillUuid,
-//                        "userUuid" => $userUuid,
-//                        "now"=>time()
-//                    )
-//                );
-//                $resultSet = $query->getResultSet();
-//                $oldParentUuid = $resultSet[0]['parent']->getProperty("uuid");
-//                $this->updateChildrenCount($oldParentUuid);
-//
-//                return true;
-//            }
-//            else {
-//                return _("This skill has children.");
-//            }
-//        }
-//        else {
-//            return _("This skill doesn't exists.");
-//        }
-//        return false;
-//
-//    }
+    public function deleteSkill($skillUuid, $userUuid){
+
+        $nodeExists = $this->findByUuid($skillUuid);
+        if ($nodeExists){
+            $childrenNumber = $this->countChildren($skillUuid);
+            if($childrenNumber == 0){
+
+                //change the label from :Skill to :DeletedSkill
+                $cyp = "MATCH (parent:Skill)-[:HAS]->(s:Skill {uuid:{skillUuid}}), (u:User {uuid:{userUuid}})
+                            SET s.previousParentUuid = parent.uuid
+                            SET s :DeletedSkill
+                            REMOVE s:Skill
+                            CREATE (u)-[r:DELETED {timestamp:{now}}]->(s)
+                            RETURN parent";
+                $query = new Query($this->client, $cyp, array(
+                        "skillUuid" => $skillUuid,
+                        "userUuid" => $userUuid,
+                        "now"=>time()
+                    )
+                );
+                $resultSet = $query->getResultSet();
+                $oldParentUuid = $resultSet[0]['parent']->getProperty("uuid");
+                $this->updateChildrenCount($oldParentUuid);
+
+                return true;
+            }
+            else {
+                return _("This skill has children.");
+            }
+        }
+        else {
+            return _("This skill doesn't exists.");
+        }
+        return false;
+    }
 
     /**
      * Update all childrenCount
@@ -836,7 +830,7 @@ class SkillManager extends Model
     public function getUuidFromSlug($slug){
         $parts = explode("-", $slug);
         $uuid = end($parts);
-        $validator = new Validator();
+        $validator = new CustomValidator();
         if ($validator->isValidUuid($uuid)){
             return $uuid;
         }
@@ -884,10 +878,9 @@ class SkillManager extends Model
 
         $query = new Query($this->client, $cyp, $namedParams);
         $resultSet = $query->getResultSet();
-
-        $activities = "";
+//        $activities = "";
         if ($resultSet->count() > 0){
-            $languageCodes = new \Model\LanguageCode();
+            $languageCodes = new LanguageCode();
 
             foreach($resultSet as $row){
                 $act = array();
@@ -896,11 +889,11 @@ class SkillManager extends Model
                 $interval = time() - $row['r']->getProperty('timestamp');
                 $act['timestamp'] = $row['r']->getProperty('timestamp');
 
-                $act['diffHuman'] = $languageCodes->localizeCarbon(Carbon::now()->subSeconds($interval)->diffForHumans(), $GLOBALS["lang"]);
+                $act['diffHuman'] = $languageCodes->localizeCarbon(Carbon::now()->subSeconds($interval)->diffForHumans(), env('lang'));
                 $act['exactTime'] = strftime("%c", $row['r']->getProperty('timestamp'));
 
-                $act['userProfileURL'] = \Controller\Router::url('viewProfile', array('username' => $row['u']->getProperty('username')), true);
-
+                $act['userProfileURL'] =  route('profile', ['username' => $row['u']->getProperty('username')]);
+//                $act['userProfileURL'] =  \Controller\Router::url('viewProfile', array('username' => $row['u']->getProperty('username')), true);
                 foreach($row['r']->getProperties() as $key => $value){
                     $act['relProps'][$key] = $value;
                 }
@@ -967,7 +960,8 @@ class SkillManager extends Model
                         $act['actionDetails'] = "";
                         break;
                 }
-
+                $activities = array();
+//                array_push($activities,$act);
                 $activities[] = $act;
             }
 
@@ -979,12 +973,13 @@ class SkillManager extends Model
                 $message["actionName"] = _("Discussed");
                 $message["actionDetails"] = $message["message"];
 
-                $message['userProfileURL'] = \Controller\Router::url('viewProfile', array('username' => $message["userProps"]["username"]), true);
+                $message['userProfileURL'] = route('profile', ['username' => $row['u']->getProperty('username')]);
 
                 $interval = time() - $message["timestamp"];
-                $message['diffHuman'] = $languageCodes->localizeCarbon(Carbon::now()->subSeconds($interval)->diffForHumans(), $GLOBALS["lang"]);
+                $message['diffHuman'] = $languageCodes->localizeCarbon(Carbon::now()->subSeconds($interval)->diffForHumans(), env('lang'));
                 $message['exactTime'] = strftime("%c", $row['r']->getProperty('timestamp'));
 
+//                array_push($activities,$message);
                 $activities[] = $message;
             }
 

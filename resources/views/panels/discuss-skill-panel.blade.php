@@ -3,7 +3,8 @@
     @include("panels/subpanel-top")
 
     <h3><?= _("DISCUSS THE SKILL"); ?></h3>
-    <form method="POST" action="<?="/api/discussSkill" ?>" id="discuss-skill-form">
+    <form method="POST" action="{{ route('discussSkill') }}" id="discuss-skill-form">
+        {{ csrf_field() }}
         <input type="hidden" name="skillUuid" id="discuss-skillUuid" value="<?= $param['skill']->getUuid(); ?>" />
         <div>
             <?=_("In english please!");?>

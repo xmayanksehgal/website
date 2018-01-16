@@ -1,9 +1,9 @@
-<form method="POST" action="" id="contact-form">
+<form method="POST" action="{{ Route('contact') }}" id="contact-form">
     {{csrf_field()}}
     <div class="row">
         <div>
             <label for="email"><?= _("Your email") ?></label>
-            <input type="email" name="email" id="email" value="<?php if(Auth::guest()){ echo "";}else{ echo Auth::user()->email;} ?>" required />
+            <input type="email" name="email" id="email" value="<?php if(Session::has('user')){ echo Session::get('user')['email'];}else"" ?>" required />
         </div>
         <div class="r">
             <label for="real_name"><?= _("Your real name") ?></label>

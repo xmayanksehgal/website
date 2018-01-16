@@ -5,18 +5,18 @@
         <ul>
             <?php
             $role_arr = array('admin','superadmin');
-            if(Auth::guest()):
+            if(!Session::has('user')):
             ?>
             <li><a class="white-link register-link" href="/register" title="Register"><?= _("Sign up"); ?></a></li>
             | <li><a class="login-link" href="/login" title="Login"><?= _("Sign in"); ?></a></li>
             <?php
                 else:?>
-                <li><a class="white-link" href="/profile" title="Profile"><?= Auth::user()->username ?></a></li>
+                <li><a class="white-link" href="/profile/<?=Session::get('user')['username']?>" title="Profile"><?= Session::get('user')['username'] ?></a></li>
                 | <li>
                     <a href="{{ route('logout') }}"
                        onclick="event.preventDefault();
 				document.getElementById('logout-form').submit();">
-                        Logout({{ Auth::user()->username}})
+                        Logout(<?=Session::get('user')['username']?>)
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
@@ -31,7 +31,7 @@
             <li><a class="" href="/skills" title="<?= _("THE SKILLS"); ?>"><?= _("THE SKILLS"); ?></a></li>
             <li><a class="" href="/project" title="<?= _("THE PROJECT"); ?>"><?= _("THE PROJECT"); ?></a></li>
             <li><a class="" href="/apply" title="<?= _("Become an Editor!"); ?>"><?= _("APPLY"); ?></a></li>
-            <li class="last"><a href="" title="<?= _("Skill Project's Community"); ?>"><?= _("Community"); ?></a></li>
+            <li class="last"><a href="https://t.me/skill_project" title="<?= _("Skill Project's Community"); ?>"><?= _("Community"); ?></a></li>
         </ul>
     </nav>
 </div>

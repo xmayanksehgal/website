@@ -1,10 +1,11 @@
 <div id="delete-skill-panel" class="panel-content">
 
-    <?php include("subpanel-top.blade.php") ?>
+    @include("panels/subpanel-top")
 
     <h3><?= _("DELETE SKILL"); ?></h3>
-    <form method="POST" action="<?= \Controller\Router::url("deleteSkill"); ?>" id="delete-skill-form">
-        <input type="hidden" name="skillUuid" id="delete-skillUuid" value="<?= $skill->getUuid(); ?>" />
+    <form method="POST" action="{{ route('deleteSkill') }}" id="delete-skill-form">
+        {{ csrf_field() }}
+        <input type="hidden" name="skillUuid" id="delete-skillUuid" value="<?= $param['skill']->getUuid(); ?>" />
 
         <div id="delete-radio-container">
             <p><?= _("YOU ARE ABOUT TO DELETE THIS SKILL."); ?></p>
@@ -22,9 +23,11 @@
         </div>
     </form>
     <div>
+        <br>
+        <br>
         <p><?= _("WARNING:"); ?></p>
         <p><?= _("You cannot delete a skill if it has children."); ?></p>
     </div>
 
-    <?php include("panel-bottom.blade.php"); ?>
+    @include("panels.panel-bottom")
 </div>
