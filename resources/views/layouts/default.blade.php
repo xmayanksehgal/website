@@ -27,7 +27,7 @@ else if ($page == 'profile/{username}')
         <nav id="footer-nav">
             <ul>
                 <li><a href="/skills" title="The Skills"><?= _("The Skills"); ?></a></li>
-                <li><a title="The Project" href="/project"><?= _("The project"); ?></a></li>
+                <li><a title="The Project" href="/project"><?= _("The Project"); ?></a></li>
                 <?php
                         if(Session::has('user'))
                             {?>

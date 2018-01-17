@@ -5,11 +5,11 @@
         <img src="img/SKP-page-project-illus.png" id="project-illus" class="illus" />
         <h2 class="first"><?= _("THE PROJECT"); ?></h2>
         <h4>The Project</h4>
-        <p>Humanity has been learning, individually and collectively, since the dawn of time. Over millenia, we have mastered an incredible number of skills. Yet, we still lack <b>a comprehensive and organized database of all human skills</b>.</p>
+        <p>Humanity has been learning, individually and collectively, since the dawn of time. Over millenniums, we have mastered an incredible number of skills. Yet, we still lack <b>a comprehensive and organized database of all human skills</b>.</p>
         <p>In this age of ambitious big data endeavours and advanced social tools, we firmly believe that it’s possible to map out all human skills. But the only smart way of doing so, is by leveraging collective knowledge and making as many people a part of the project as possible.</p>
         <h4>Our Mission</h4>
-        <p>We aim to build the largest, most multilingual, most accurate skills database ever made by allowing <b>a diverse and skillful community</b> to contribute their individual skills to the global map.</p>
-        <p>The crowdsourced data is free for non-commercial use. Because the database is the result of many people's voluntary effort, we do not allow the data to be used commercially. However, we may consider licensing it for free to people or organizations who need it for socially valuable projects.</p>
+        <p>We aim to build the largest, multilingual, accurate skills database ever made by allowing a diverse and skillful community to contribute their individual skills to the global map. The crowd-sourced data is free. Because the database is the result of many people's voluntary effort along with ours, we allow people to export the data and make an API through which users can get access to it.</p>
+        <p><b>The license for the data set is <a href="https://creativecommons.org/licenses/by/4.0/">here</a> and for the code is  <a href="https://github.com/SpringRole/website/blob/SKIL-32/LICENSE">here</a>.</b></p>
         <h4>How Can You Help?</h4>
         <p>In our simple structure, <b>each skill can be split into more specific sub-skills</b>. All you have to do is add your own skills in the most appropriate section.</p>
         <p><a href="/project" alt="<?= _("The skills"); ?>">You can browse the skill database</a> right now. You don't need an account to do it.</p>
@@ -112,12 +112,6 @@
             </div>
         </div>
         <div class="faq-q">
-            <h4>Why is the background pink?</h4>
-            <div class="faq-a">
-                <p>It’s not “pink”, it’s “orchid”, you insensitive clod.</p>
-            </div>
-        </div>
-        <div class="faq-q">
             <h4>Is this shit made in Flash or what?</h4>
             <div class="faq-a">
                 <p>No sir. It’s genuine HTML 5 with a Canvas flavour and some <a href="http://kineticjs.com/">KineticJS</a> magic on top! And let’s not forget the hidden part of the iceberg: the database is powered by the fantastic graph-based database <a href="http://www.neo4j.org/">Neo4J</a>.</p>
@@ -128,13 +122,7 @@
         <div class="faq-q">
             <h4>How many skills are there in the database?</h4>
             <div class="faq-a">
-                <p>Skill Project started a few days ago with a little over 300 skills. We expect the database to grow quickly into thousands of skills.</p>
-            </div>
-        </div>
-        <div class="faq-q">
-            <h4>Where can I download the data?</h4>
-            <div class="faq-a">
-                <p>We are working on it! If it’s important to you, drop us a line so we can help you out.</p>
+                <p>Skill Project re-started a few days ago with a little over 2000 skills. We expect the database to grow quickly into thousands of skills.</p>
             </div>
         </div>
         <div class="faq-q">
@@ -145,12 +133,6 @@
         </div>
 
         <h3><?=_("Internationalization")?></h3>
-        <div class="faq-q">
-            <h4>What happens when I add a skill in French ? Is it copied to the English tree?</h4>
-            <div class="faq-a">
-                <p>When you add a skill to the tree, it's automatically translated into all supported languages. So it will appear in the English tree too. However, do not think of it as a copied skill because it is actually the exact same skill you added, only with a different (translated name). If you decide to move the skill within the database, you move it in all other languages simultaneously.</p>
-            </div>
-        </div>
         <div class="faq-q">
             <h4>Why is Skill Project not available in my language?</h4>
             <div class="faq-a">
@@ -170,13 +152,6 @@
             <h4>What's next for Skill Project?</h4>
             <div class="faq-a">
                 <p>We believe our 21st century society is becoming more and more skill-centered, which is why we created Skill Project. We believe there will be many ways to leverage the power of a community-curated comprehensive skills database, but we have no definite plans for it yet. We are eager to read what <em>you</em> think about it! Let’s talk about it in the <a href="" title="<?= _("Skill Project's Community"); ?>">community forum</a>.</p>
-            </div>
-        </div>
-        <div class="faq-q">
-            <h4>How do you make money out of this?</h4>
-            <div class="faq-a">
-                <p>At the moment, we don’t, but the satisfaction we get by working on a global scale project for humanity is more than enough to keep us focused!<br />
-                    However, we do hope that a business plan will come out of it one day. We are never going to turn Skill Project into a for-profit website. It just wouldn’t make any sense. But we may consider developing some side projects linked with Skill Project in one way or another. Not our priority right now, though.</p>
             </div>
         </div>
         <div class="faq-q">
@@ -203,7 +178,15 @@
         <div class="faq-q">
             <h4>How many Editors are there?</h4>
             <div class="faq-a">
-                <p>We started Skill Project a few days ago, when the only Editors were the 3 core team members.</p>
+                <p>We re-started Skill Project a few days ago, when the only Editors were the a few core team members.</p>
+            </div>
+        </div>
+
+        <h3><?=_("General")?></h3>
+        <div class="faq-q">
+            <h4>WHAT IS SPRINGROLE'S STORY WITH THE SKILL-PROJECT?</h4>
+            <div class="faq-a">
+                <p>SpringRole wanted to build a Taxonomy of Skills and came across The Skills Project. We contacted the founders and decided that SpringRole can extend the current peice of work for the greater good.</p>
             </div>
         </div>
 
@@ -221,7 +204,7 @@
 <section>
     <div class="container">
         <h2><?= _("MEET THE TEAM"); ?></h2>
-        <p>Skill Project is brought to you by 3 friends living in Paris, France. We share a passion for learning, teaching and experimenting which has naturally led us to come up with Skill Project. Apart from that, we come from very different cultural and gastronomical backgrounds! Come and chat with us in the <a href="https://t.me/skill_project" title="<?= _("Skill Project's Community"); ?>">community section</a>.
+        <p>Skill Project was brought to you by 3 friends living in Paris, France. Who passion for learning, teaching and experimenting which has naturally led us to come up with Skill Project. Come and chat with us in the <a href="https://t.me/skill_project" title="<?= _("Skill Project's Community"); ?>">community section</a>.
         </p>
         <div class="project-col">
             <div id="dario-pic" class="team-pic"></div>

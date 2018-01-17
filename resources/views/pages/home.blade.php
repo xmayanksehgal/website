@@ -40,7 +40,10 @@
         <h2>Ready to go?</h2>
         <p>Start exploring skills and add your own!</p>
         <div id="home-btn-go-bottom" class="home-btn"><a href="/skills">Enter Skill Project</a></div>
-        <p>You can also download the Skill-Project Data Dump <a href="/export">here</a>.</p>
+        <p>
+        <h5><b>To download the Skill Database:</b></h5>
+            <br>
+            <script async="async" id="button_b5cea20f-35cc-45f6-8249-b6b6792dff17" src="//www.paywithatweet.com/embeds/b5cea20f-35cc-45f6-8249-b6b6792dff17" charset="utf-8"></script>
     </div> 
 </section>
 @endsection
