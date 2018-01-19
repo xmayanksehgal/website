@@ -227,7 +227,6 @@ class Mailer
                 ));
             $message = array_merge($this->defaultConfig, $config);
             $response = $mandrill->messages->sendTemplate($template_name,$template_content, $message);
-            var_dump($message);die;
             return $response;
         }
         catch(\Mandrill_Error $e) {
